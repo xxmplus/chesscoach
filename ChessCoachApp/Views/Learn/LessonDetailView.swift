@@ -1,4 +1,6 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachCoach
 
 struct LessonDetailView: View {
     let lesson: Lesson

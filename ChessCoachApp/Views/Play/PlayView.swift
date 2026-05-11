@@ -1,4 +1,7 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachEngine
+import ChessCoachCoach
 
 struct PlayView: View {
     @EnvironmentObject private var engineManager: EngineManager
@@ -134,9 +137,6 @@ struct PlayView: View {
             }
             .onAppear {
                 vm.setEngine(engineManager.engine)
-            }
-            .onChange(of: engineManager.engine) { _, newEngine in
-                vm.setEngine(newEngine)
             }
         }
     }

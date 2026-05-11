@@ -1,4 +1,7 @@
 import SwiftUI
+import ChessCoachEngine
+import ChessCoachCoach
+import ChessCoachShared
 
 @main
 struct ChessCoachApp: App {

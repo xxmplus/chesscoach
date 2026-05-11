@@ -1,4 +1,6 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachEngine
 
 // MARK: - EvaluationBar
 
@@ -60,13 +62,13 @@ struct EvaluationBar: View {
         return (clamped + 1000) / 2000  // 0 = -1000cp, 1 = +1000cp
     }
 
-    private func filledWidth(in totalWidth: CGF) -> CGF {
+    private func filledWidth(in totalWidth: CGFloat) -> CGFloat {
         let half = totalWidth / 2
-        let sign: CGF = evaluation >= 0 ? 1 : -1
+        let sign: CGFloat = evaluation >= 0 ? 1 : -1
         return half + sign * half * min(1.0, abs(evaluation) / 300.0)
     }
 
-    private func scorePosition(in totalWidth: CGF) -> CGF {
+    private func scorePosition(in totalWidth: CGFloat) -> CGFloat {
         let half = totalWidth / 2
         let offset = (evaluation / 300.0) * half
         return half + max(-half, min(half, offset))
@@ -116,7 +118,7 @@ struct MoveListView: View {
 
 struct RatingBadge: View {
     let rating: Int
-    let size: CGF
+    let size: CGFloat
 
     private let theme = ChessTheme.midnightStudy
 

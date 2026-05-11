@@ -1,5 +1,7 @@
 import Foundation
 import Combine
+import ChessCoachCoach
+import ChessCoachShared
 
 @MainActor
 final class ProgressViewModel: ObservableObject {

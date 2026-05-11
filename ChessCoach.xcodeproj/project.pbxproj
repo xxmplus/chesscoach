@@ -23,26 +23,27 @@
 		32323CED7552F0A7139FC1CE /* Lc0Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */; };
 		3444DDB283BF7D77E0C90205 /* EvaluationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */; };
 		3C83A8765D6B19C0592006D5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1038220AFC4BEDAC6DE0180 /* Piece.swift */; };
-		3E13EA488C2A76EEA351919F /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CA64224D6433A300221DD88F /* SQLite */; };
 		48EE2BE4D3DFAD7D22F17605 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */; };
 		52F473EE6CEAE29B2F89639A /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4B3D6CDC5E79B2DB23F99 /* LearnViewModel.swift */; };
 		60C53C0A0BB8A250F11785B2 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413E1E29EE92BABCFA6744AF /* PlayViewModel.swift */; };
 		63426CB53ABB740E7F62386A /* ChessCoachEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; };
 		6713F531F894DB3E9D5F7DBD /* ChessCoachShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		677558C703CE07196CEB2F0E /* StockfishLoader.html in Resources */ = {isa = PBXBuildFile; fileRef = E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */; };
 		69B20FCD5A498FD42773AEFC /* LessonLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */; };
 		6CC7CE2853B579EAAD6484A4 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF798A042DC104101468FDB /* Move.swift */; };
 		72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429CE764FDA01154525A997 /* ChessBoardView.swift */; };
 		7CD8D15DD9732F4521CE4A2C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */; };
 		8F031C9A043BC59DE41DD2A8 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE497B52C584992BA8FA4D3 /* Square.swift */; };
-		A28EE93839577DA38DA800E7 /* ChessKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28F57AF52F4CA40B799901E7 /* ChessKit */; };
+		A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692740E0A12666EAB133B8D7 /* Badges.swift */; };
+		A28EE93839577DA38DA800E7 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04E0468034F5EEF4EF7E9A47 /* SQLite */; };
 		A658710BEB1663CDC17FFCA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31710702840A956FACA611 /* ContentView.swift */; };
 		A9D4CE316DC3F01FD04B5E57 /* ChessCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72C0FBE6FBCD79D211F1D7C /* ChessCoachApp.swift */; };
 		AD7672CF58B4DCFC21391F4F /* OpeningBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938C823F22C246226233B92 /* OpeningBook.swift */; };
 		AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F834BE376D2740E5D8B41888 /* Assets.xcassets */; };
 		B54AC2C6EA1FF3D11E00CB6E /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */; };
 		C0DC6EB90F16894048AAB100 /* PuzzlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */; };
-		CA0E0763D1CEC51FA872F64C /* ChessKit in Frameworks */ = {isa = PBXBuildFile; productRef = 79C9E34ED096378B557ADD0A /* ChessKit */; };
+		CA0E0763D1CEC51FA872F64C /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CA64224D6433A300221DD88F /* SQLite */; };
 		CAF15441ACEF04FEEA8ACCF8 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2909EAFC5A311AA765A3EA /* PuzzleViewModel.swift */; };
 		CAF3C1C529A643EB693FFB5A /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 		CB6804B718F04BC554F7DD91 /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
@@ -129,6 +130,7 @@
 		46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lc0Adapter.swift; sourceTree = "<group>"; };
 		53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachCoach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationBar.swift; sourceTree = "<group>"; };
+		692740E0A12666EAB133B8D7 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesView.swift; sourceTree = "<group>"; };
 		7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEngine.swift; sourceTree = "<group>"; };
 		7EE497B52C584992BA8FA4D3 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		DC0F795861814EE336FD9FB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD2909EAFC5A311AA765A3EA /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
 		E5AA508611DE7C1489147A17 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StockfishLoader.html; sourceTree = "<group>"; };
 		ECD3401035E0B54A578DCBA2 /* UCIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCIParser.swift; sourceTree = "<group>"; };
 		F834BE376D2740E5D8B41888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDACC3730AE7325360BE41DA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -164,8 +167,7 @@
 				F3FEDAA1F9C38D516C97A46F /* ChessCoachShared.framework in Frameworks */,
 				63426CB53ABB740E7F62386A /* ChessCoachEngine.framework in Frameworks */,
 				20CB8840A5C707F04DB16BB4 /* ChessCoachCoach.framework in Frameworks */,
-				CA0E0763D1CEC51FA872F64C /* ChessKit in Frameworks */,
-				3E13EA488C2A76EEA351919F /* SQLite in Frameworks */,
+				CA0E0763D1CEC51FA872F64C /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A28EE93839577DA38DA800E7 /* ChessKit in Frameworks */,
+				A28EE93839577DA38DA800E7 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +282,7 @@
 		8BDB28159A7E77E3DF0B980F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				692740E0A12666EAB133B8D7 /* Badges.swift */,
 				6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */,
 			);
 			path = Shared;
@@ -347,6 +350,7 @@
 			children = (
 				F834BE376D2740E5D8B41888 /* Assets.xcassets */,
 				37891DB26DFBF4F34BD25F98 /* Info.plist */,
+				E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */,
 				D8B283DDBD81E07B16C0F959 /* App */,
 				BD2C96102431E1E002EAF8BF /* ViewModels */,
 				ABCFE8BD9418674B2EA0C1C1 /* Views */,
@@ -387,7 +391,7 @@
 			);
 			name = ChessCoachShared;
 			packageProductDependencies = (
-				28F57AF52F4CA40B799901E7 /* ChessKit */,
+				04E0468034F5EEF4EF7E9A47 /* SQLite */,
 			);
 			productName = ChessCoachShared;
 			productReference = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */;
@@ -430,7 +434,6 @@
 			);
 			name = ChessCoachApp;
 			packageProductDependencies = (
-				79C9E34ED096378B557ADD0A /* ChessKit */,
 				CA64224D6433A300221DD88F /* SQLite */,
 			);
 			productName = ChessCoachApp;
@@ -479,7 +482,6 @@
 			mainGroup = 11AC94CF52968AE85FBA40A3;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D0A08E293DF4F8836F400FAA /* XCRemoteSwiftPackageReference "ChessKit" */,
 				87D9B1A6A47DC3BF9C3FBD92 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -501,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */,
+				677558C703CE07196CEB2F0E /* StockfishLoader.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +539,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */,
 				72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */,
 				A9D4CE316DC3F01FD04B5E57 /* ChessCoachApp.swift in Sources */,
 				A658710BEB1663CDC17FFCA7 /* ContentView.swift in Sources */,
@@ -957,30 +961,17 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.15.0;
-			};
-		};
-		D0A08E293DF4F8836F400FAA /* XCRemoteSwiftPackageReference "ChessKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/niceparadise/ChessKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				kind = exactVersion;
+				version = 0.15.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		28F57AF52F4CA40B799901E7 /* ChessKit */ = {
+		04E0468034F5EEF4EF7E9A47 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D0A08E293DF4F8836F400FAA /* XCRemoteSwiftPackageReference "ChessKit" */;
-			productName = ChessKit;
-		};
-		79C9E34ED096378B557ADD0A /* ChessKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D0A08E293DF4F8836F400FAA /* XCRemoteSwiftPackageReference "ChessKit" */;
-			productName = ChessKit;
+			package = 87D9B1A6A47DC3BF9C3FBD92 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
 		};
 		CA64224D6433A300221DD88F /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;

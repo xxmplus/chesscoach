@@ -64,4 +64,26 @@ public struct LessonProgress {
         case inProgress = "in_progress"
         case completed = "completed"
     }
+
+    public init(lessonId: String, stars: Int, status: Status) {
+        self.lessonId = lessonId
+        self.stars = stars
+        self.status = status
+    }
 }
+
+// MARK: - Hashable
+
+extension Lesson: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    public static func == (lhs: Lesson, rhs: Lesson) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension LessonProgress: Hashable {}
+extension Lesson.Phase: Hashable {}
+extension Lesson.LessonPosition: Hashable {}
+extension Lesson.StarsThresholds: Hashable {}

@@ -1,5 +1,7 @@
 import SwiftUI
 import Combine
+import ChessCoachShared
+import ChessCoachEngine
 
 @MainActor
 final class PlayViewModel: ObservableObject {

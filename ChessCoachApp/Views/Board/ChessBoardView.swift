@@ -1,4 +1,6 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachEngine
 
 // MARK: - ChessBoardView
 
@@ -28,65 +30,86 @@ public struct ChessBoardView: View {
 
     public var body: some View {
         GeometryReader { geometry in
-            let size = min(geometry.size.width, geometry.size.height)
-            let squareSize = size / 8
-
-            ZStack {
-                // Board squares
-                VStack(spacing: 0) {
-                    ForEach((0..<8).reversed(), id: \.self) { rank in
-                        HStack(spacing: 0) {
-                            ForEach(0..<8, id: \.self) { file in
-                                let square = Square(file: file, rank: rank)
-                                SquareView(
-                                    square: square,
-                                    size: squareSize,
-                                    theme: theme,
-                                    isLight: (file + rank) % 2 == 0,
-                                    isSelected: selectedSquare == square,
-                                    isLegalDestination: legalDestinations.contains(square),
-                                    isLastMove: isLastMoveSquare(square),
-                                    isCheck: isCheckSquare(square),
-                                    piece: position.piece(at: square),
-                                    isDragTarget: draggedPiece?.square == square && draggedPiece?.square != square,
-                                    onTap: interactive ? { handleTap(square) } : nil
-                                )
-                            }
-                        }
-                    }
-                }
-
-                // Engine arrows overlay
-                if !engineLines.isEmpty {
-                    EngineArrowsOverlay(lines: engineLines, squareSize: squareSize)
-                }
-
-                // Dragged piece overlay
-                if let dragged = draggedPiece {
-                    PieceView(
-                        piece: dragged.piece,
-                        size: squareSize
-                    )
-                    .offset(dragOffset)
-                    .position(
-                        x: geometry.size.width / 2,
-                        y: geometry.size.height / 2
-                    )
-                    .allowsHitTesting(false)
-                }
-            }
-            .frame(width: size, height: size, alignment: .center)
-            .gesture(
-                interactive ? dragGesture(squareSize: squareSize) : nil
-            )
+            boardBody(geometry: geometry)
         }
         .aspectRatio(1, contentMode: .fit)
+    }
+
+    // Extracted to help Swift compiler with type inference
+    @ViewBuilder
+    private func boardBody(geometry: GeometryProxy) -> some View {
+        let size = min(geometry.size.width, geometry.size.height)
+        let squareSize = size / 8
+
+        ZStack {
+            squaresLayer(size: size, squareSize: squareSize)
+            arrowsOverlay(squareSize: squareSize)
+            draggedPieceOverlay(squareSize: squareSize, boardSize: size)
+        }
+        .frame(width: size, height: size, alignment: .center)
+        .gesture(interactive ? makeDragGesture(squareSize: squareSize) : nil)
+    }
+
+    @ViewBuilder
+    private func squaresLayer(size: CGFloat, squareSize: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            ForEach((0..<8).reversed(), id: \.self) { rank in
+                HStack(spacing: 0) {
+                    ForEach(0..<8, id: \.self) { file in
+                        squareCell(file: file, rank: rank, squareSize: squareSize)
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func squareCell(file: Int, rank: Int, squareSize: CGFloat) -> some View {
+        let sq = Square(file: file, rank: rank)
+        let isLight = (file + rank) % 2 == 0
+        let isSelected = selectedSquare == sq
+        let isLegalDest = legalDestinations.contains(sq)
+        let isLastMoveCell = isLastMoveSquare(sq)
+        let isCheckCell = isCheckSquare(sq)
+        let piece = position.piece(at: sq)
+        let isDragTgt = isLegalDest && draggedPiece != nil
+
+        SquareView(
+            square: sq,
+            size: squareSize,
+            theme: theme,
+            isLight: isLight,
+            isSelected: isSelected,
+            isLegalDestination: isLegalDest,
+            isLastMove: isLastMoveCell,
+            isCheck: isCheckCell,
+            piece: piece,
+            isDragTarget: isDragTgt,
+            onTap: interactive ? { handleTap(sq) } : nil
+        )
+    }
+
+    @ViewBuilder
+    private func arrowsOverlay(squareSize: CGFloat) -> some View {
+        if !engineLines.isEmpty {
+            EngineArrowsOverlay(lines: engineLines, squareSize: squareSize)
+        }
+    }
+
+    @ViewBuilder
+    private func draggedPieceOverlay(squareSize: CGFloat, boardSize: CGFloat) -> some View {
+        if let dragged = draggedPiece {
+            PieceView(piece: dragged.piece, size: squareSize)
+                .offset(dragOffset)
+                .position(x: boardSize / 2, y: boardSize / 2)
+                .allowsHitTesting(false)
+        }
     }
 
     // MARK: - Helpers
 
     private func isLastMoveSquare(_ square: Square) -> Bool {
-        false // Set by lastMove tracking if needed
+        false
     }
 
     private func isCheckSquare(_ square: Square) -> Bool {
@@ -96,7 +119,6 @@ public struct ChessBoardView: View {
 
     private func handleTap(_ square: Square) {
         if let selected = selectedSquare {
-            // Try to move
             let moves = position.legalMoves(from: selected)
             if let move = moves.first(where: { $0.to == square }) {
                 selectedSquare = nil
@@ -120,29 +142,28 @@ public struct ChessBoardView: View {
         }
     }
 
-    private func dragGesture(squareSize: CGF) -> some Gesture {
+    private func makeDragGesture(squareSize: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
                 if draggedPiece == nil {
                     let file = Int(value.location.x / squareSize)
                     let rank = 7 - Int(value.location.y / squareSize)
-                    guard let square = Optional(Square(file: max(0, min(7, file)), rank: max(0, min(7, rank)))),
-                          let piece = position.piece(at: square),
+                    let clampedFile = max(0, min(7, file))
+                    let clampedRank = max(0, min(7, rank))
+                    let sq = Square(file: clampedFile, rank: clampedRank)
+                    guard let piece = position.piece(at: sq),
                           piece.color == position.turn else { return }
-                    selectedSquare = square
-                    draggedPiece = (square, piece)
-                    legalDestinations = position.legalMoves(from: square).map { $0.to }
+                    selectedSquare = sq
+                    draggedPiece = (sq, piece)
+                    legalDestinations = position.legalMoves(from: sq).map { $0.to }
                     dragOffset = .zero
                 }
-                dragOffset = CGSize(
-                    width: value.translation.width,
-                    height: value.translation.height
-                )
+                dragOffset = CGSize(width: value.translation.width, height: value.translation.height)
             }
             .onEnded { value in
                 guard let dragged = draggedPiece else { return }
-                let file = Int((value.location.x) / squareSize)
-                let rank = 7 - Int((value.location.y) / squareSize)
+                let file = Int(value.location.x / squareSize)
+                let rank = 7 - Int(value.location.y / squareSize)
                 let target = Square(file: max(0, min(7, file)), rank: max(0, min(7, rank)))
 
                 if legalDestinations.contains(target) {
@@ -167,7 +188,7 @@ public struct ChessBoardView: View {
 
 struct SquareView: View {
     let square: Square
-    let size: CGF
+    let size: CGFloat
     let theme: ChessTheme
     let isLight: Bool
     let isSelected: Bool
@@ -182,20 +203,15 @@ struct SquareView: View {
         ZStack {
             Rectangle()
                 .fill(squareColor)
-
             if piece != nil {
                 PieceView(piece: piece!, size: size * 0.9)
                     .position(x: size / 2, y: size / 2)
             }
-
-            // Legal move dot
             if isLegalDestination && piece == nil {
                 Circle()
                     .fill(theme.primary.opacity(0.5))
                     .frame(width: size * 0.25, height: size * 0.25)
             }
-
-            // Capture highlight
             if isLegalDestination && piece != nil {
                 Circle()
                     .stroke(theme.primary, lineWidth: 3)
@@ -219,14 +235,13 @@ struct SquareView: View {
 
 struct PieceView: View {
     let piece: Piece
-    let size: CGF
+    let size: CGFloat
 
     var body: some View {
         Text(piece.character)
             .font(.system(size: size * 0.8, weight: .bold))
             .foregroundColor(piece.color == .white ? .white : .black)
-            .shadow(color: piece.color == .white ? .black.opacity(0.5) : .white.opacity(0.3),
-                    radius: 1, x: 1, y: 1)
+            .shadow(color: piece.color == .white ? .black.opacity(0.5) : .white.opacity(0.3), radius: 1, x: 1, y: 1)
     }
 }
 
@@ -234,20 +249,15 @@ struct PieceView: View {
 
 struct EngineArrowsOverlay: View {
     let lines: [EngineLine]
-    let squareSize: CGF
+    let squareSize: CGFloat
 
     var body: some View {
-        Canvas { context, canvasSize in
+        Canvas { context, _ in
             for (index, line) in lines.prefix(3).enumerated() {
                 guard line.moves.count >= 2 else { continue }
-                let from = square(fromUCi: line.moves[0])
-                let to = square(fromUCi: line.moves[1])
-                drawArrow(
-                    context: context,
-                    from: from,
-                    to: to,
-                    color: arrowColor(index: index)
-                )
+                let fromCG = squareCG(fromUCi: line.moves[0])
+                let toCG = squareCG(fromUCi: line.moves[1])
+                drawArrow(context: context, from: fromCG, to: toCG, color: arrowColor(index: index))
             }
         }
     }
@@ -260,17 +270,17 @@ struct EngineArrowsOverlay: View {
         let dy = to.y - from.y
         let angle = atan2(dy, dx)
         let length = sqrt(dx*dx + dy*dy)
-        let headLength = min(30.0, length * 0.3)
-        let headWidth = headLength * 0.5
+        let headLen = min(30.0, length * 0.3)
+        let headW = headLen * 0.5
 
-        let endX = to.x - cos(angle) * headLength * 0.5
-        let endY = to.y - sin(angle) * headLength * 0.5
+        let endX = to.x - cos(angle) * headLen * 0.5
+        let endY = to.y - sin(angle) * headLen * 0.5
         path.addLine(to: CGPoint(x: endX, y: endY))
 
-        let leftX = endX - cos(angle - .pi / 6) * headLength
-        let leftY = endY - sin(angle - .pi / 6) * headLength
-        let rightX = endX - cos(angle + .pi / 6) * headLength
-        let rightY = endY - sin(angle + .pi / 6) * headLength
+        let leftX = endX - cos(angle - .pi / 6) * headLen
+        let leftY = endY - sin(angle - .pi / 6) * headLen
+        let rightX = endX - cos(angle + .pi / 6) * headLen
+        let rightY = endY - sin(angle + .pi / 6) * headLen
 
         path.move(to: CGPoint(x: endX, y: endY))
         path.addLine(to: CGPoint(x: leftX, y: leftY))
@@ -280,12 +290,13 @@ struct EngineArrowsOverlay: View {
         context.stroke(path, with: .color(color), lineWidth: 3)
     }
 
-    private func square(fromUCi uci: String) -> CGPoint {
-        guard uci.count >= 4 else { return .zero }
-        let fromSq = String(uci.prefix(2))
-        guard let square = Square(description: fromSq) else { return .zero }
-        let x = (7 - square.file) * squareSize + squareSize / 2
-        let y = square.rank * squareSize + squareSize / 2
+    private func squareCG(fromUCi uci: String) -> CGPoint {
+        guard uci.count >= 4,
+              let sq = Square(description: String(uci.prefix(2))) else {
+            return .zero
+        }
+        let x = CGFloat(7 - sq.file) * squareSize + squareSize / 2
+        let y = CGFloat(sq.rank) * squareSize + squareSize / 2
         return CGPoint(x: x, y: y)
     }
 

@@ -16,12 +16,9 @@ settings:
     INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
 
 packages:
-  ChessKit:
-    url: https://github.com/niceparadise/ChessKit
-    from: "1.0.0"
   SQLite:
     url: https://github.com/stephencelis/SQLite.swift
-    from: "0.15.0"
+    exactVersion: 0.15.0
 
 targets:
   ChessCoachShared:
@@ -38,7 +35,7 @@ targets:
         DEFINES_MODULE: YES
         APPLICATION_EXTENSION_API_ONLY: YES
     dependencies:
-      - package: ChessKit
+      - package: SQLite
     info:
       path: ChessCoachShared/Info.plist
       properties:
@@ -54,6 +51,7 @@ targets:
       - path: ChessCoachEngine
         excludes:
           - "**/.DS_Store"
+          - "StockfishLoader.html"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.engine
@@ -110,7 +108,6 @@ targets:
       - target: ChessCoachShared
       - target: ChessCoachEngine
       - target: ChessCoachCoach
-      - package: ChessKit
       - package: SQLite
     info:
       path: ChessCoachApp/Info.plist

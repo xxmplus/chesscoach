@@ -1,5 +1,8 @@
 import SwiftUI
 import Combine
+import ChessCoachShared
+import ChessCoachEngine
+import ChessCoachCoach
 
 @MainActor
 final class PuzzleViewModel: ObservableObject {
@@ -41,7 +44,7 @@ final class PuzzleViewModel: ObservableObject {
     }
 
     func submitMove(_ uci: String) {
-        guard let puzzle = currentPuzzle else { return }
+        guard currentPuzzle != nil else { return }
         let result = engine.submitMove(uci)
         switch result {
         case .correct:

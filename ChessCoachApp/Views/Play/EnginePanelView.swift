@@ -1,4 +1,6 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachEngine
 
 struct EnginePanelView: View {
     @ObservedObject var vm: PlayViewModel

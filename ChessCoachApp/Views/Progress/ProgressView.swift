@@ -1,4 +1,6 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachCoach
 
 struct ProgressView: View {
     @StateObject private var vm = ProgressViewModel()

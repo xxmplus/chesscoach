@@ -1,8 +1,9 @@
 import SwiftUI
+import ChessCoachShared
+import ChessCoachCoach
 
 struct LearnView: View {
     @StateObject private var vm = LearnViewModel()
-    @State private var selectedLesson: Lesson?
 
     private let theme = ChessTheme.midnightStudy
 
@@ -47,13 +48,13 @@ struct LearnView: View {
                     // Lesson list
                     LazyVStack(spacing: 12) {
                         ForEach(vm.lessons(for: vm.selectedPhase)) { lesson in
-                            LessonRowView(
-                                lesson: lesson,
-                                progress: vm.progress(for: lesson)
-                            )
-                            .onTapGesture {
-                                selectedLesson = lesson
+                            NavigationLink(value: lesson) {
+                                LessonRowView(
+                                    lesson: lesson,
+                                    progress: vm.progress(for: lesson)
+                                )
                             }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal)
@@ -61,7 +62,7 @@ struct LearnView: View {
                 .padding(.vertical)
             }
             .background(theme.background)
-            .navigationDestination(item: $selectedLesson) { lesson in
+            .navigationDestination(for: Lesson.self) { lesson in
                 LessonDetailView(lesson: lesson, vm: vm)
             }
         }
@@ -173,37 +174,5 @@ struct LessonRowView: View {
         .padding(14)
         .background(theme.surface)
         .cornerRadius(12)
-    }
-}
-
-// MARK: - DifficultyBadge
-
-struct DifficultyBadge: View {
-    let difficulty: Int
-
-    private var color: Color {
-        switch difficulty {
-        case ..<900:  return .green
-        case 900..<1100: return .yellow
-        case 1100..<1400: return .orange
-        default: return .red
-        }
-    }
-
-    var body: some View {
-        Text(eloLabel)
-            .font(.caption2.bold())
-            .foregroundColor(.white)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 2)
-            .background(color)
-            .cornerRadius(4)
-    }
-
-    private var eloLabel: String {
-        if difficulty < 1200 { return "Beginner" }
-        if difficulty < 1400 { return "Intermediate" }
-        if difficulty < 1600 { return "Advanced" }
-        return "Expert"
     }
 }

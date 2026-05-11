@@ -1,5 +1,7 @@
 import Foundation
 import Combine
+import ChessCoachCoach
+import ChessCoachShared
 
 // MARK: - LearnViewModel
 
@@ -19,7 +21,13 @@ final class LearnViewModel: ObservableObject {
     func load() {
         lessons = loader.loadLessons()
         let stored = db.getAllLessonProgress()
-        progressMap = stored.mapValues { (stars: $0.stars, status: Lesson.Status(rawValue: $0.status) ?? .notStarted) }
+        for (lessonId, value) in stored {
+            progressMap[lessonId] = LessonProgress(
+                lessonId: lessonId,
+                stars: value.stars,
+                status: LessonProgress.Status(rawValue: value.status) ?? .notStarted
+            )
+        }
     }
 
     func lessons(for phase: Lesson.Phase?) -> [Lesson] {
