@@ -1,0 +1,123 @@
+name: ChessCoach
+options:
+  bundleIdPrefix: com.chesscoach
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+    INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+
+packages:
+  ChessKit:
+    url: https://github.com/niceparadise/ChessKit
+    from: "1.0.0"
+  SQLite:
+    url: https://github.com/stephencelis/SQLite.swift
+    from: "0.15.0"
+
+targets:
+  ChessCoachShared:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ChessCoachShared
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.shared
+        INFOPLIST_FILE: ChessCoachShared/Info.plist
+        DEFINES_MODULE: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+    dependencies:
+      - package: ChessKit
+    info:
+      path: ChessCoachShared/Info.plist
+      properties:
+        CFBundleDisplayName: ChessCoachShared
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSPrincipalClass: ""
+
+  ChessCoachEngine:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ChessCoachEngine
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.engine
+        INFOPLIST_FILE: ChessCoachEngine/Info.plist
+        DEFINES_MODULE: YES
+    dependencies:
+      - target: ChessCoachShared
+    info:
+      path: ChessCoachEngine/Info.plist
+      properties:
+        CFBundleDisplayName: ChessCoachEngine
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSPrincipalClass: ""
+
+  ChessCoachCoach:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ChessCoachCoach
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.coach
+        INFOPLIST_FILE: ChessCoachCoach/Info.plist
+        DEFINES_MODULE: YES
+    dependencies:
+      - target: ChessCoachShared
+      - target: ChessCoachEngine
+      - package: SQLite
+    info:
+      path: ChessCoachCoach/Info.plist
+      properties:
+        CFBundleDisplayName: ChessCoachCoach
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        NSPrincipalClass: ""
+
+  ChessCoachApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: ChessCoachApp
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.app
+        INFOPLIST_FILE: ChessCoachApp/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    dependencies:
+      - target: ChessCoachShared
+      - target: ChessCoachEngine
+      - target: ChessCoachCoach
+      - package: ChessKit
+      - package: SQLite
+    info:
+      path: ChessCoachApp/Info.plist
+      properties:
+        CFBundleDisplayName: ChessCoach
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true

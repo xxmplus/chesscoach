@@ -1,0 +1,1 @@
+ChessCoachShared/Models/DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf filter=lfs diff=lfs merge=lfs -text
