@@ -236,7 +236,7 @@ public final class CoachEngine {
 
     // MARK: - Quality Classification
 
-    private func classifyMove(move: Move, position: Position, engineEval: EngineLine) -> MoveQuality {
+    func classifyMove(move: Move, position: Position, engineEval: EngineLine) -> MoveQuality {
         let cp = engineEval.score.centipawns ?? 0
 
         if cp >= 300 { return .brilliant }

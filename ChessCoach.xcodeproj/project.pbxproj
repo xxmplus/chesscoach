@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		01873EF58507F0DB8D94A2A2 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3035E561DC9984E037751C /* PlayView.swift */; };
 		091F8784B5D47CFD06508B27 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86886C61EAFB7C0B04C5E8C8 /* ChessEngine.swift */; };
+		0D6DE5780EAF887F17B37E53 /* LLMService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6088348CF9E9FD33BC01B7B /* LLMService.swift */; };
 		11C8BA37411EC9D8235F56D0 /* PuzzleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */; };
 		1A1326310924DDD3F42C1AF1 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = F6BDEF6A43BECEF8B3AF073D /* SQLite */; };
 		1ADEC01388A95D8DBAF78A84 /* CoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */; };
@@ -16,6 +17,7 @@
 		1F47608CF885EE01A481648B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDACC3730AE7325360BE41DA /* DatabaseManager.swift */; };
 		20CB8840A5C707F04DB16BB4 /* ChessCoachCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; };
 		23D92E33294BFE6274453863 /* ChessCoachEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		25DAEDFA5AAE3E9AB1D9538D /* SwiftLlamaAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DD98A3E98C8A624C13F28E /* SwiftLlamaAdapter.swift */; };
 		2813FCA2341CE2F155E916CB /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560A53EE109A108AA642EFB /* ProgressViewModel.swift */; };
 		294EB8FF7C0DEB84C3877083 /* EngineLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6957549329BADF4D33772 /* EngineLine.swift */; };
 		2B98CDAA2257C8CB37C8310B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108C2B882209B81670076696 /* Theme.swift */; };
@@ -23,7 +25,9 @@
 		31A912084662392C71452778 /* UCIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD3401035E0B54A578DCBA2 /* UCIParser.swift */; };
 		32323CED7552F0A7139FC1CE /* Lc0Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */; };
 		3444DDB283BF7D77E0C90205 /* EvaluationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */; };
+		379060F397FB4A1C482BA19A /* LocalInferenceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */; };
 		3C83A8765D6B19C0592006D5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1038220AFC4BEDAC6DE0180 /* Piece.swift */; };
+		4173ED4C8BA070C3E1A2DA5C /* LLMCoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */; };
 		48EE2BE4D3DFAD7D22F17605 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */; };
 		52F473EE6CEAE29B2F89639A /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4B3D6CDC5E79B2DB23F99 /* LearnViewModel.swift */; };
@@ -37,6 +41,7 @@
 		72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429CE764FDA01154525A997 /* ChessBoardView.swift */; };
 		761889E722DC286EBFB36B22 /* stockfish.js in Resources */ = {isa = PBXBuildFile; fileRef = F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */; };
 		7CD8D15DD9732F4521CE4A2C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */; };
+		8372475B74CE968C894F3AA7 /* LLMServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */; };
 		8F031C9A043BC59DE41DD2A8 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE497B52C584992BA8FA4D3 /* Square.swift */; };
 		95D90B98E105E993E76F43E8 /* stockfish.wasm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3EBCC9A41A4DE3AB5272ADD9 /* stockfish.wasm.js */; };
 		A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692740E0A12666EAB133B8D7 /* Badges.swift */; };
@@ -46,6 +51,7 @@
 		AD7672CF58B4DCFC21391F4F /* OpeningBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938C823F22C246226233B92 /* OpeningBook.swift */; };
 		AF0BD32AFB447FFA159CCB4C /* CoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514E019DDA37BE1EEAB6A6B4 /* CoachView.swift */; };
 		AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F834BE376D2740E5D8B41888 /* Assets.xcassets */; };
+		B2FDEBCA859B44067ABF0F89 /* SwiftLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 76B8912AD39CE7A5CCF48E3C /* SwiftLlama */; };
 		B54AC2C6EA1FF3D11E00CB6E /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */; };
 		C0DC6EB90F16894048AAB100 /* PuzzlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */; };
 		CA0E0763D1CEC51FA872F64C /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CA64224D6433A300221DD88F /* SQLite */; };
@@ -54,8 +60,10 @@
 		CB6804B718F04BC554F7DD91 /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 		D32B8BD8D87364B8A2351828 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA508611DE7C1489147A17 /* LearnView.swift */; };
 		D70A277359D05CD8E2ABEABF /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */; };
+		DF5BDC640FA15C21B251EB8E /* ModelDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB077614566820ADE2D19280 /* ModelDownloadService.swift */; };
 		E0FDB0F71DF8A9EAF9624D30 /* LessonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38DCCCC341931FC44BC1BD9 /* LessonDetailView.swift */; };
 		EE80157B17B5CD87EAD4A327 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3D753A5E71CAA4F56A0F /* Position.swift */; };
+		EF377DC6039C69D6DA01B1AF /* LLMChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72072999B27DC48C2FC17A10 /* LLMChatService.swift */; };
 		F3FEDAA1F9C38D516C97A46F /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 /* End PBXBuildFile section */
 
@@ -140,17 +148,23 @@
 		692740E0A12666EAB133B8D7 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesView.swift; sourceTree = "<group>"; };
 		7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEngine.swift; sourceTree = "<group>"; };
+		72072999B27DC48C2FC17A10 /* LLMChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMChatService.swift; sourceTree = "<group>"; };
+		7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalInferenceConfig.swift; sourceTree = "<group>"; };
 		7EE497B52C584992BA8FA4D3 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockfishAdapter.swift; sourceTree = "<group>"; };
 		86886C61EAFB7C0B04C5E8C8 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 		890B0BCD55FBEE5544AE7D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachEngine.swift; sourceTree = "<group>"; };
+		91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMCoachEngine.swift; sourceTree = "<group>"; };
+		9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMServerManager.swift; sourceTree = "<group>"; };
 		A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTracker.swift; sourceTree = "<group>"; };
+		A6088348CF9E9FD33BC01B7B /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
 		A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CE9C95248B42CFFC076E27 /* ChessCoachApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChessCoachApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF798A042DC104101468FDB /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		BF1A3D753A5E71CAA4F56A0F /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		CB077614566820ADE2D19280 /* ModelDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDownloadService.swift; sourceTree = "<group>"; };
 		CD31710702840A956FACA611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D1038220AFC4BEDAC6DE0180 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */ = {isa = PBXFileReference; path = stockfish.wasm; sourceTree = "<group>"; };
@@ -161,6 +175,7 @@
 		D9D6957549329BADF4D33772 /* EngineLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineLine.swift; sourceTree = "<group>"; };
 		DC0F795861814EE336FD9FB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DD2909EAFC5A311AA765A3EA /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
+		E4DD98A3E98C8A624C13F28E /* SwiftLlamaAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLlamaAdapter.swift; sourceTree = "<group>"; };
 		E5AA508611DE7C1489147A17 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StockfishLoader.html; sourceTree = "<group>"; };
 		ECD3401035E0B54A578DCBA2 /* UCIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCIParser.swift; sourceTree = "<group>"; };
@@ -186,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF3C1C529A643EB693FFB5A /* ChessCoachShared.framework in Frameworks */,
+				B2FDEBCA859B44067ABF0F89 /* SwiftLlama in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +233,7 @@
 				29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */,
 				890B0BCD55FBEE5544AE7D49 /* Info.plist */,
 				3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */,
+				91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */,
 				0938C823F22C246226233B92 /* OpeningBook.swift */,
 				A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */,
 				7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */,
@@ -276,6 +293,8 @@
 			isa = PBXGroup;
 			children = (
 				DC0F795861814EE336FD9FB5 /* Info.plist */,
+				7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */,
+				CB077614566820ADE2D19280 /* ModelDownloadService.swift */,
 				15D9CAFC27D5977A030C15CC /* Models */,
 				FFF2D4C467F3D814F602E5C6 /* Persistence */,
 			);
@@ -348,7 +367,11 @@
 				D9D6957549329BADF4D33772 /* EngineLine.swift */,
 				D5250437B4FE13187F4AA89F /* Info.plist */,
 				46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */,
+				72072999B27DC48C2FC17A10 /* LLMChatService.swift */,
+				9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */,
+				A6088348CF9E9FD33BC01B7B /* LLMService.swift */,
 				817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */,
+				E4DD98A3E98C8A624C13F28E /* SwiftLlamaAdapter.swift */,
 				ECD3401035E0B54A578DCBA2 /* UCIParser.swift */,
 			);
 			path = ChessCoachEngine;
@@ -450,6 +473,7 @@
 			);
 			name = ChessCoachEngine;
 			packageProductDependencies = (
+				76B8912AD39CE7A5CCF48E3C /* SwiftLlama */,
 			);
 			productName = ChessCoachEngine;
 			productReference = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */;
@@ -507,7 +531,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 				};
 			};
@@ -522,6 +546,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				87D9B1A6A47DC3BF9C3FBD92 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				A024C64DEDE185C06596EDA1 /* XCRemoteSwiftPackageReference "swift-llama-cpp" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D38E907AD01F15FD1DF2CB08 /* Products */;
@@ -557,6 +582,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F47608CF885EE01A481648B /* DatabaseManager.swift in Sources */,
+				379060F397FB4A1C482BA19A /* LocalInferenceConfig.swift in Sources */,
+				DF5BDC640FA15C21B251EB8E /* ModelDownloadService.swift in Sources */,
 				6CC7CE2853B579EAAD6484A4 /* Move.swift in Sources */,
 				3C83A8765D6B19C0592006D5 /* Piece.swift in Sources */,
 				EE80157B17B5CD87EAD4A327 /* Position.swift in Sources */,
@@ -571,8 +598,12 @@
 			files = (
 				091F8784B5D47CFD06508B27 /* ChessEngine.swift in Sources */,
 				294EB8FF7C0DEB84C3877083 /* EngineLine.swift in Sources */,
+				EF377DC6039C69D6DA01B1AF /* LLMChatService.swift in Sources */,
+				8372475B74CE968C894F3AA7 /* LLMServerManager.swift in Sources */,
+				0D6DE5780EAF887F17B37E53 /* LLMService.swift in Sources */,
 				32323CED7552F0A7139FC1CE /* Lc0Adapter.swift in Sources */,
 				4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */,
+				25DAEDFA5AAE3E9AB1D9538D /* SwiftLlamaAdapter.swift in Sources */,
 				31A912084662392C71452778 /* UCIParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +637,7 @@
 			files = (
 				1ADEC01388A95D8DBAF78A84 /* CoachEngine.swift in Sources */,
 				D70A277359D05CD8E2ABEABF /* ContentLoader.swift in Sources */,
+				4173ED4C8BA070C3E1A2DA5C /* LLMCoachEngine.swift in Sources */,
 				69B20FCD5A498FD42773AEFC /* LessonLibrary.swift in Sources */,
 				AD7672CF58B4DCFC21391F4F /* OpeningBook.swift in Sources */,
 				B54AC2C6EA1FF3D11E00CB6E /* ProgressTracker.swift in Sources */,
@@ -750,7 +782,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -897,7 +929,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1009,6 +1041,14 @@
 				version = 0.15.0;
 			};
 		};
+		A024C64DEDE185C06596EDA1 /* XCRemoteSwiftPackageReference "swift-llama-cpp" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pgorzelany/swift-llama-cpp";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1016,6 +1056,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 87D9B1A6A47DC3BF9C3FBD92 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
+		};
+		76B8912AD39CE7A5CCF48E3C /* SwiftLlama */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A024C64DEDE185C06596EDA1 /* XCRemoteSwiftPackageReference "swift-llama-cpp" */;
+			productName = SwiftLlama;
 		};
 		CA64224D6433A300221DD88F /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;

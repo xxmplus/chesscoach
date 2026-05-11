@@ -2,14 +2,14 @@ name: ChessCoach
 options:
   bundleIdPrefix: com.chesscoach
   deploymentTarget:
-    iOS: "16.0"
-  xcodeVersion: "15.0"
+    iOS: "17.0"
+  xcodeVersion: "16.0"
   generateEmptyDirectories: true
 
 settings:
   base:
     SWIFT_VERSION: "5.9"
-    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
     TARGETED_DEVICE_FAMILY: "1"
     INFOPLIST_KEY_UILaunchScreen_Generation: YES
     INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
@@ -19,6 +19,9 @@ packages:
   SQLite:
     url: https://github.com/stephencelis/SQLite.swift
     exactVersion: 0.15.0
+  SwiftLlama:
+    url: https://github.com/pgorzelany/swift-llama-cpp
+    from: "1.0.0"
 
 targets:
   ChessCoachShared:
@@ -59,6 +62,7 @@ targets:
         DEFINES_MODULE: YES
     dependencies:
       - target: ChessCoachShared
+      - package: SwiftLlama
     info:
       path: ChessCoachEngine/Info.plist
       properties:
