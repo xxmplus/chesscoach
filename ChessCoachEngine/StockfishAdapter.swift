@@ -5,8 +5,18 @@ import Combine
 // MARK: - StockfishAdapter
 
 /// iOS-compatible UCI chess engine adapter for Stockfish.
-/// Uses a hidden WKWebView running Stockfish.js as WebAssembly to avoid
-/// the iOS restriction on Process (macOS only).
+/// Uses a hidden WKWebView running Stockfish.js as WebAssembly (no Process API on iOS).
+///
+/// Bundle structure required:
+///   ChessCoachApp/
+///     StockfishLoader.html        ← loads stockfish.js + stockfish.wasm.js
+///     Assets/stockfish/
+///       stockfish.js              ← Emscripten JavaScript wrapper (~1.5 MB)
+///       stockfish.wasm.js         ← Emscripten WASM loader (~94 KB)
+///       stockfish.wasm            ← WebAssembly binary (~546 KB)
+///
+/// Swift sends UCI commands via: `window.sfCommand('uci')`
+/// Engine output arrives via: `window.webkit.messageHandlers.stockfish.postMessage(...)`
 public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandler {
 
     public let displayName = "Stockfish 16"
@@ -20,12 +30,12 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
     private var pendingContinuation: CheckedContinuation<Void, Error>?
     private var analysisSubject: PassthroughSubject<EngineLine, Never>?
     private var currentDepth: Int = 20
-    private var currentTimeout: TimeInterval?
     private var engineReady = false
     private var pendingCommands: [String] = []
 
-    // MARK: - WKUserContentControllerDelegate
+    // MARK: - WKScriptMessageHandler
 
+    /// Receives messages from the JavaScript engine bridge.
     public func userContentController(_ controller: WKUserContentController, didReceive message: WKScriptMessage) {
         guard let body = message.body as? String else { return }
         handleEngineOutput(body)
@@ -48,7 +58,6 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
             let subject = PassthroughSubject<EngineLine, Never>()
             self.analysisSubject = subject
             self.currentDepth = depth ?? 20
-            self.currentTimeout = timeout
 
             self.sendCommand("position fen \(fen)")
             var goCmd = "go depth \(self.currentDepth)"
@@ -57,8 +66,9 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
             }
             self.sendCommand(goCmd)
 
+            // Auto-timeout so we don't leak subscribers
             if let t = timeout {
-                DispatchQueue.main.asyncAfter(deadline: .now() + t + 1) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + t + 2) { [weak self] in
                     self?.stopAnalysisInternal()
                     subject.send(completion: .finished)
                 }
@@ -107,16 +117,19 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
             wv.isHidden = true
             self.webView = wv
 
-            // Try bundled HTML first, otherwise use inline
-            if let bundledURL = Bundle.main.url(forResource: "stockfish", withExtension: "html", subdirectory: "ChessCoachEngine") {
-                wv.loadFileURL(bundledURL, allowingReadAccessTo: bundledURL.deletingLastPathComponent())
-            } else if let bundledURL = Bundle.main.url(forResource: "stockfish", withExtension: "html") {
-                wv.loadFileURL(bundledURL, allowingReadAccessTo: bundledURL.deletingLastPathComponent())
+            // Load the bundled StockfishLoader.html
+            // It loads stockfish.js + stockfish.wasm from Assets/stockfish/
+            if let htmlURL = Bundle.main.url(forResource: "StockfishLoader", withExtension: "html") {
+                // Allow read access to the Assets/stockfish/ directory for WASM loading
+                let assetsURL = Bundle.main.resourceURL!
+                wv.loadFileURL(htmlURL, allowingReadAccessTo: assetsURL)
             } else {
+                // Fallback to inline HTML (compile-test only — no real engine)
                 wv.loadHTMLString(Self.inlineHTML, baseURL: nil)
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            // Give WASM time to initialize, then send uci
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
                 self?.sendCommand("uci")
             }
         }
@@ -126,19 +139,22 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
         engineQueue.async { [weak self] in
             guard let self = self else { return }
 
-            if line == "uciok" {
-                if !self.engineReady {
-                    self.engineReady = true
-                    self.isAvailable = true
-                    for cmd in self.pendingCommands { self.sendCommandNow(cmd) }
-                    self.pendingCommands = []
-                }
+            // The HTML bridge signals engine readiness via this marker
+            if line == "stockfish:ready" {
+                self.engineReady = true
+                self.isAvailable = true
                 self.pendingContinuation?.resume()
                 self.pendingContinuation = nil
                 return
             }
 
-            if line == "readyok" { return }
+            // UCI responses
+            if line == "uciok" {
+                return
+            }
+            if line == "readyok" {
+                return
+            }
 
             if line.hasPrefix("bestmove") {
                 let tokens = line.split(separator: " ").map(String.init)
@@ -146,6 +162,7 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
                 return
             }
 
+            // Parse info lines: depth, score, pv
             if let parsed = UCIParser.parseInfoLine(line) {
                 let engineLine = EngineLine(
                     depth: parsed.depth,
@@ -160,6 +177,7 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
         }
     }
 
+    /// Sends a UCI command to the engine via JavaScript bridge.
     private func sendCommand(_ cmd: String) {
         engineQueue.async { [weak self] in
             guard let self = self else { return }
@@ -171,18 +189,64 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
         }
     }
 
+    /// Dispatches command to the WKWebView JavaScript context.
+    /// Uses window.sfCommand() which is exposed by StockfishLoader.html.
     private func sendCommandNow(_ cmd: String) {
+        // Escape for JavaScript string embedding
         let escaped = cmd
             .replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "'", with: "\\'")
-        let js = "window.stockfish && window.stockfish.postMessage && window.stockfish.postMessage('\(escaped)');"
+            .replacingOccurrences(of: "\n", with: "\\n")
+
+        // Use the sfCommand bridge exposed by StockfishLoader.html
+        let js = "if (window.sfCommand) { window.sfCommand('\(escaped)'); } else { console.warn('sfCommand not ready'); }"
+
         DispatchQueue.main.async { [weak self] in
-            self?.webView?.evaluateJavaScript(js, completionHandler: nil)
+            self?.webView?.evaluateJavaScript(js, completionHandler: { _, error in
+                if let error = error {
+                    print("[StockfishAdapter] evaluateJavaScript error: \(error)")
+                }
+            })
         }
     }
 
-    // MARK: - JavaScript Bootstrap (inline, no regex escapes)
+    // MARK: - Inline HTML Fallback (compile-test stub, no real engine)
 
-    // swiftlint:disable:next line_length
-    private static let inlineHTML = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head><body><script>\nwindow.stockfish = {\n    postMessage: function(cmd) {\n        var t = cmd.trim().split(\" \");\n        var c = t[0];\n        if (c === \"uci\") {\n            window.webkit.messageHandlers.stockfish.postMessage(\"id name Stockfish 16 (WASM)\");\n            window.webkit.messageHandlers.stockfish.postMessage(\"id author T. Romstad et al.\");\n            window.webkit.messageHandlers.stockfish.postMessage(\"uciok\");\n        } else if (c === \"isready\") {\n            window.webkit.messageHandlers.stockfish.postMessage(\"readyok\");\n        } else if (c === \"position\" || c === \"go\") {\n            window.webkit.messageHandlers.stockfish.postMessage(\"info depth 1 score cp 30\");\n            window.webkit.messageHandlers.stockfish.postMessage(\"info depth 20 score cp 45 pv e2e4 e7e5\");\n            window.webkit.messageHandlers.stockfish.postMessage(\"bestmove e2e4\");\n        }\n    }\n};\n</script></body></html>"
+    /// Minimal fallback HTML used only when the real StockfishLoader.html
+    /// is not bundled. This stub responds to UCI commands with canned output
+    /// so the app can compile and render the UI without the WASM engine.
+    private static let inlineHTML = """
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>Stockfish</title></head>
+<body>
+<script>
+(function () {
+    var handler = window.webkit && window.webkit.messageHandlers
+                  && window.webkit.messageHandlers.stockfish;
+    function sendToSwift(msg) { if (handler) handler.postMessage(msg); }
+    window.sfCommand = function (cmd) {
+        var tokens = cmd.trim().split(/\\s+/);
+        var c = tokens[0];
+        if (c === "uci") {
+            sendToSwift("id name Stockfish 16 (stub)");
+            sendToSwift("id author T. Romstad et al.");
+            sendToSwift("uciok");
+            sendToSwift("stockfish:ready");
+        } else if (c === "isready") {
+            sendToSwift("readyok");
+        } else if (c === "quit") {
+            // no-op
+        } else if (c === "position" || c === "go") {
+            // Stub bestmove + a few info lines for UI testing
+            sendToSwift("info depth 1 score cp 30 pv e2e4");
+            sendToSwift("info depth 10 score cp 42 pv e2e4 e7e5 g1f3");
+            sendToSwift("bestmove e2e4");
+        }
+    };
+})();
+</script>
+</body>
+</html>
+"""
 }

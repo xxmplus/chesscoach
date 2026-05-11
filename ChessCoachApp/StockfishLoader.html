@@ -1,28 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Stockfish</title>
-<style>body{margin:0}canvas{display:none}</style>
-<script>
-// Stockfish.js - UCI chess engine running as WebAssembly
-(function() {
-  varStockfish=function(){"use strict";var _scriptDir="undefined"!==typeof document&&document.currentScript?document.currentScript.src:void 0;return function(stack&&stack.length?stack[stack.length-1]:"");}();
-if(!_scriptDir)_scriptDir=""; _scriptDir=_scriptDir.endsWith("/")?_scriptDir:_scriptDir+"/"; var Module={"locateFile":function(s){return _scriptDir+s}};
-// Minimal stockfish.js bootstrap - real implementation loaded from wasm
-window.stockfish={postMessage:function(cmd){window.sfReady&&window.sfReady(cmd)}};
-var __盈亏=[];
-// END BOOTSTRAP MARKER - actual engine code goes here
-// For now, respond to UCI commands with dummy output for compile test
-window.sfReady=function(cmd){
-var tokens=cmd.trim().split(/\s+/);
-var cmd=tokens[0];
-if(cmd==="uci"){window.stockfish.postMessage("id name Stockfish 16");window.stockfish.postMessage("id author Stockfish team");window.stockfish.postMessage("uciok");}
-else if(cmd==="isready"){window.stockfish.postMessage("readyok");}
-else if(cmd==="quit"){}
-};
-})();
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Stockfish Engine</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a2e; width: 100vw; height: 100vh; overflow: hidden; }
+    canvas { display: none; }
+    #status {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #a0a0c0;
+      font-family: monospace;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
 </head>
-<body></body>
+<body>
+  <div id="status">Loading Stockfish engine…</div>
+
+  <!--
+    Stockfish.js (Emscripten build) loads stockfish.wasm asynchronously.
+    The wasm file path is resolved via Module.locateFile().
+    All UCI output is forwarded to Swift via webkit.messageHandlers.stockfish.
+  -->
+  <script src="stockfish.js"></script>
+  <script src="stockfish.wasm.js"></script>
+  <script>
+    (function () {
+      var handler = window.webkit && window.webkit.messageHandlers
+                    && window.webkit.messageHandlers.stockfish;
+
+      function sendToSwift(msg) {
+        if (handler) {
+          handler.postMessage(msg);
+        }
+      }
+
+      // Override Module.print to forward engine output to Swift
+      Module['print'] = function (text) { sendToSwift(text); };
+      Module['printErr'] = function (text) { sendToSwift('[ERR] ' + text); };
+
+      // Signal that engine is initialised and ready for UCI commands
+      Module['onRuntimeInitialized'] = function () {
+        sendToSwift('stockfish:ready');
+        document.getElementById('status').textContent = 'Stockfish ready';
+        document.getElementById('status').style.color = '#60a0ff';
+        setTimeout(function () {
+          var status = document.getElementById('status');
+          if (status) status.style.display = 'none';
+        }, 800);
+      };
+
+      // Expose a global command function so Swift can send UCI commands
+      window['sfCommand'] = function (cmd) {
+        if (typeof stockfish !== 'undefined' && stockfish.postMessage) {
+          stockfish.postMessage(cmd);
+        } else {
+          sendToSwift('[WARN] stockfish not ready, command queued: ' + cmd);
+        }
+      };
+    })();
+  </script>
+</body>
 </html>
