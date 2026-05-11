@@ -11,6 +11,7 @@
 		091F8784B5D47CFD06508B27 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86886C61EAFB7C0B04C5E8C8 /* ChessEngine.swift */; };
 		11C8BA37411EC9D8235F56D0 /* PuzzleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */; };
 		1A1326310924DDD3F42C1AF1 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = F6BDEF6A43BECEF8B3AF073D /* SQLite */; };
+		1ADEC01388A95D8DBAF78A84 /* CoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */; };
 		1EFD353A8770B1D70B70ED6B /* EnginePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D785ED667342AAB65EAD004E /* EnginePanelView.swift */; };
 		1F47608CF885EE01A481648B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDACC3730AE7325360BE41DA /* DatabaseManager.swift */; };
 		20CB8840A5C707F04DB16BB4 /* ChessCoachCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; };
@@ -26,6 +27,7 @@
 		48EE2BE4D3DFAD7D22F17605 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */; };
 		52F473EE6CEAE29B2F89639A /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4B3D6CDC5E79B2DB23F99 /* LearnViewModel.swift */; };
+		570CDA6F2A735B12EBC663FE /* stockfish.wasm in Resources */ = {isa = PBXBuildFile; fileRef = D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */; };
 		60C53C0A0BB8A250F11785B2 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413E1E29EE92BABCFA6744AF /* PlayViewModel.swift */; };
 		63426CB53ABB740E7F62386A /* ChessCoachEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; };
 		6713F531F894DB3E9D5F7DBD /* ChessCoachShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -33,13 +35,16 @@
 		69B20FCD5A498FD42773AEFC /* LessonLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */; };
 		6CC7CE2853B579EAAD6484A4 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF798A042DC104101468FDB /* Move.swift */; };
 		72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429CE764FDA01154525A997 /* ChessBoardView.swift */; };
+		761889E722DC286EBFB36B22 /* stockfish.js in Resources */ = {isa = PBXBuildFile; fileRef = F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */; };
 		7CD8D15DD9732F4521CE4A2C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */; };
 		8F031C9A043BC59DE41DD2A8 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE497B52C584992BA8FA4D3 /* Square.swift */; };
+		95D90B98E105E993E76F43E8 /* stockfish.wasm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3EBCC9A41A4DE3AB5272ADD9 /* stockfish.wasm.js */; };
 		A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692740E0A12666EAB133B8D7 /* Badges.swift */; };
 		A28EE93839577DA38DA800E7 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 04E0468034F5EEF4EF7E9A47 /* SQLite */; };
 		A658710BEB1663CDC17FFCA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31710702840A956FACA611 /* ContentView.swift */; };
 		A9D4CE316DC3F01FD04B5E57 /* ChessCoachApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72C0FBE6FBCD79D211F1D7C /* ChessCoachApp.swift */; };
 		AD7672CF58B4DCFC21391F4F /* OpeningBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938C823F22C246226233B92 /* OpeningBook.swift */; };
+		AF0BD32AFB447FFA159CCB4C /* CoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514E019DDA37BE1EEAB6A6B4 /* CoachView.swift */; };
 		AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F834BE376D2740E5D8B41888 /* Assets.xcassets */; };
 		B54AC2C6EA1FF3D11E00CB6E /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */; };
 		C0DC6EB90F16894048AAB100 /* PuzzlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */; };
@@ -125,9 +130,11 @@
 		37891DB26DFBF4F34BD25F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C3035E561DC9984E037751C /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLibrary.swift; sourceTree = "<group>"; };
+		3EBCC9A41A4DE3AB5272ADD9 /* stockfish.wasm.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = stockfish.wasm.js; sourceTree = "<group>"; };
 		413E1E29EE92BABCFA6744AF /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
 		4560A53EE109A108AA642EFB /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lc0Adapter.swift; sourceTree = "<group>"; };
+		514E019DDA37BE1EEAB6A6B4 /* CoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachView.swift; sourceTree = "<group>"; };
 		53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachCoach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationBar.swift; sourceTree = "<group>"; };
 		692740E0A12666EAB133B8D7 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
@@ -137,6 +144,7 @@
 		817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockfishAdapter.swift; sourceTree = "<group>"; };
 		86886C61EAFB7C0B04C5E8C8 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 		890B0BCD55FBEE5544AE7D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachEngine.swift; sourceTree = "<group>"; };
 		A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTracker.swift; sourceTree = "<group>"; };
 		A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CE9C95248B42CFFC076E27 /* ChessCoachApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChessCoachApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +153,7 @@
 		BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		CD31710702840A956FACA611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D1038220AFC4BEDAC6DE0180 /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */ = {isa = PBXFileReference; path = stockfish.wasm; sourceTree = "<group>"; };
 		D38DCCCC341931FC44BC1BD9 /* LessonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailView.swift; sourceTree = "<group>"; };
 		D5250437B4FE13187F4AA89F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D72C0FBE6FBCD79D211F1D7C /* ChessCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessCoachApp.swift; sourceTree = "<group>"; };
@@ -155,6 +164,7 @@
 		E5AA508611DE7C1489147A17 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StockfishLoader.html; sourceTree = "<group>"; };
 		ECD3401035E0B54A578DCBA2 /* UCIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCIParser.swift; sourceTree = "<group>"; };
+		F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = stockfish.js; sourceTree = "<group>"; };
 		F834BE376D2740E5D8B41888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDACC3730AE7325360BE41DA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +213,7 @@
 		025529FFD81177D89C24EC78 /* ChessCoachCoach */ = {
 			isa = PBXGroup;
 			children = (
+				90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */,
 				29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */,
 				890B0BCD55FBEE5544AE7D49 /* Info.plist */,
 				3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */,
@@ -271,6 +282,14 @@
 			path = ChessCoachShared;
 			sourceTree = "<group>";
 		};
+		66C511482B9850E9259F325C /* Coach */ = {
+			isa = PBXGroup;
+			children = (
+				514E019DDA37BE1EEAB6A6B4 /* CoachView.swift */,
+			);
+			path = Coach;
+			sourceTree = "<group>";
+		};
 		71946E202696746CFA0896E4 /* Puzzles */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,11 +307,20 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		A6DE2CC570136387C4A86890 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F9D0CF311D019A2F43ADB140 /* stockfish */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		ABCFE8BD9418674B2EA0C1C1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CD31710702840A956FACA611 /* ContentView.swift */,
 				0C4257A3764303878AB14613 /* Board */,
+				66C511482B9850E9259F325C /* Coach */,
 				F91598C66118F400F2DF29DA /* Learn */,
 				2F30120AA7EF8DAD330D5FF1 /* Play */,
 				1B43DEB9CB3B6966BF57A332 /* Progress */,
@@ -352,6 +380,7 @@
 				37891DB26DFBF4F34BD25F98 /* Info.plist */,
 				E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */,
 				D8B283DDBD81E07B16C0F959 /* App */,
+				A6DE2CC570136387C4A86890 /* Assets */,
 				BD2C96102431E1E002EAF8BF /* ViewModels */,
 				ABCFE8BD9418674B2EA0C1C1 /* Views */,
 			);
@@ -365,6 +394,16 @@
 				D38DCCCC341931FC44BC1BD9 /* LessonDetailView.swift */,
 			);
 			path = Learn;
+			sourceTree = "<group>";
+		};
+		F9D0CF311D019A2F43ADB140 /* stockfish */ = {
+			isa = PBXGroup;
+			children = (
+				F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */,
+				D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */,
+				3EBCC9A41A4DE3AB5272ADD9 /* stockfish.wasm.js */,
+			);
+			path = stockfish;
 			sourceTree = "<group>";
 		};
 		FFF2D4C467F3D814F602E5C6 /* Persistence */ = {
@@ -504,6 +543,9 @@
 			files = (
 				AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */,
 				677558C703CE07196CEB2F0E /* StockfishLoader.html in Resources */,
+				761889E722DC286EBFB36B22 /* stockfish.js in Resources */,
+				570CDA6F2A735B12EBC663FE /* stockfish.wasm in Resources */,
+				95D90B98E105E993E76F43E8 /* stockfish.wasm.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +584,7 @@
 				A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */,
 				72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */,
 				A9D4CE316DC3F01FD04B5E57 /* ChessCoachApp.swift in Sources */,
+				AF0BD32AFB447FFA159CCB4C /* CoachView.swift in Sources */,
 				A658710BEB1663CDC17FFCA7 /* ContentView.swift in Sources */,
 				1EFD353A8770B1D70B70ED6B /* EnginePanelView.swift in Sources */,
 				3444DDB283BF7D77E0C90205 /* EvaluationBar.swift in Sources */,
@@ -561,6 +604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ADEC01388A95D8DBAF78A84 /* CoachEngine.swift in Sources */,
 				D70A277359D05CD8E2ABEABF /* ContentLoader.swift in Sources */,
 				69B20FCD5A498FD42773AEFC /* LessonLibrary.swift in Sources */,
 				AD7672CF58B4DCFC21391F4F /* OpeningBook.swift in Sources */,
