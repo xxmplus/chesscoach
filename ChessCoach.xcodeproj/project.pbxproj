@@ -29,6 +29,7 @@
 		379060F397FB4A1C482BA19A /* LocalInferenceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */; };
 		3C83A8765D6B19C0592006D5 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1038220AFC4BEDAC6DE0180 /* Piece.swift */; };
 		3DBFD7E82550BBFEC4DE2B2E /* PieceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DD7376A25B0F1A12A9B3AF /* PieceTests.swift */; };
+		3E13EA488C2A76EEA351919F /* SwiftLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 73E2ECAF1330CDBA93908E13 /* SwiftLlama */; };
 		4173ED4C8BA070C3E1A2DA5C /* LLMCoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */; };
 		4192B80C68532B04D198E08C /* ChessCoachCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; };
 		48EE2BE4D3DFAD7D22F17605 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -298,6 +299,7 @@
 				63426CB53ABB740E7F62386A /* ChessCoachEngine.framework in Frameworks */,
 				20CB8840A5C707F04DB16BB4 /* ChessCoachCoach.framework in Frameworks */,
 				CA0E0763D1CEC51FA872F64C /* SQLite in Frameworks */,
+				3E13EA488C2A76EEA351919F /* SwiftLlama in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +744,7 @@
 			name = ChessCoachApp;
 			packageProductDependencies = (
 				CA64224D6433A300221DD88F /* SQLite */,
+				73E2ECAF1330CDBA93908E13 /* SwiftLlama */,
 			);
 			productName = ChessCoachApp;
 			productReference = A9CE9C95248B42CFFC076E27 /* ChessCoachApp.app */;
@@ -1598,6 +1601,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 87D9B1A6A47DC3BF9C3FBD92 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
+		};
+		73E2ECAF1330CDBA93908E13 /* SwiftLlama */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A024C64DEDE185C06596EDA1 /* XCRemoteSwiftPackageReference "swift-llama-cpp" */;
+			productName = SwiftLlama;
 		};
 		76B8912AD39CE7A5CCF48E3C /* SwiftLlama */ = {
 			isa = XCSwiftPackageProductDependency;

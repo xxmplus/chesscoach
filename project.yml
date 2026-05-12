@@ -191,6 +191,7 @@ targets:
       - target: ChessCoachEngine
       - target: ChessCoachCoach
       - package: SQLite
+      - package: SwiftLlama
     info:
       path: ChessCoachApp/Info.plist
       properties:
