@@ -24,10 +24,13 @@ final class PuzzleViewModel: ObservableObject {
     private let loader = ContentLoader.shared
     private var cancellables = Set<AnyCancellable>()
 
-    /// The color the human player is playing in this puzzle.
-    /// Always the side-to-move in the FEN (the one whose move it is at the start).
+    /// The color the human player plays as in this puzzle. Set once at load and never changes,
+    /// even after opponent moves are applied to the board.
+    private var userColor: PieceColor = .white
+
+    /// The color the human player plays as. Always the original side-to-move in the FEN.
     var playerColor: PieceColor {
-        position.turn
+        userColor
     }
 
     init() {
@@ -48,6 +51,7 @@ final class PuzzleViewModel: ObservableObject {
     private func load(_ puzzle: Puzzle) {
         currentPuzzle = puzzle
         position = Position(fen: puzzle.fen)
+        userColor = position.turn  // Remember which color the human plays
         engine.load(puzzle)
         feedbackMessage = nil
         feedbackType = nil
