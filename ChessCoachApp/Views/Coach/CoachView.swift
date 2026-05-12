@@ -98,7 +98,7 @@ struct CoachView: View {
 
             // Evaluation (if available)
             if let eval = message.annotation?.evaluation {
-                Text("eval: \(eval > 0 ? "+" : "")\(String(format: "%.1f", eval / 100))")
+                Text("eval: \(eval > 0 ? "+" : "")\(String(format: "%.1f", Double(eval) / 100.0))")
                     .font(.caption2)
                     .foregroundColor(Color(hex: "8080a0"))
                     .frame(maxWidth: .infinity, alignment: isUser ? .trailing : .leading)
@@ -108,55 +108,47 @@ struct CoachView: View {
 
     private func bubbleColor(for message: CoachMessage) -> Color {
         switch message.tone {
-        case .encouraging:
-            return Color(hex: "1a3a2a") // dark green
-        case .explanatory:
-            return Color(hex: "1a2a3a") // dark blue
-        case .cautionary:
-            return Color(hex: "3a2a1a") // dark amber
-        case .directive:
-            return Color(hex: "2a2a3a") // dark slate
-        case .reflective:
-            return Color(hex: "1e1e30") // dark navy
+        case .encouraging:  return Color(hex: "1a3a2a")
+        case .explanatory:  return Color(hex: "1a2a3a")
+        case .cautionary:   return Color(hex: "3a2a1a")
+        case .directive:    return Color(hex: "2a2a3a")
+        case .reflective:   return Color(hex: "1e1e30")
         }
     }
 
     private func borderColor(for message: CoachMessage) -> Color {
         switch message.annotation?.moveQuality {
-        case .brilliant:  return .yellow
-        case .great:      return .green
-        case .good, .best: return Color(hex: "3a6a3a")
-        case .mistake:   return .orange
-        case .blunder:   return .red
-        case .inaccuracy, .interesting, .dubious, .none: return .clear
+        case .brilliant:          return .yellow
+        case .great:              return .green
+        case .good, .best:         return Color(hex: "3a6a3a")
+        case .mistake:             return .orange
+        case .blunder:             return .red
+        case .inaccuracy,
+             .interesting,
+             .dubious,
+             .none:                 return .clear
         }
     }
 
     private func categoryColor(_ category: CoachMessage.Category) -> Color {
         switch category {
-        case .praise, .moveExplanation, .patternSpot:
-            return .green
-        case .warning, .moveComparison, .whatIfAnalysis:
-            return .orange
-        case .tactical, .exercise:
-            return .purple
-        case .principle, .opening, .endgame, .middlegame:
-            return .blue
-        case .longTerm, .shortTerm, .strategic:
-            return .cyan
-        case .candidateAnalysis:
-            return .yellow
+        case .praise, .moveExplanation, .patternSpot:     return .green
+        case .warning, .moveComparison, .whatIfAnalysis:  return .orange
+        case .tactical, .exercise:                        return .purple
+        case .principle, .opening, .endgame, .middlegame: return .blue
+        case .longTerm, .shortTerm, .strategic:           return .cyan
+        case .candidateAnalysis:                           return .yellow
         }
     }
 
     private func qualityColor(_ quality: MoveQuality) -> Color {
         switch quality {
-        case .brilliant:   return .yellow
-        case .great:       return .green
-        case .good, .best: return Color(hex: "60c060")
-        case .inaccuracy:  return Color(hex: "ffa500")
-        case .mistake:     return .orange
-        case .blunder:     return .red
+        case .brilliant:          return .yellow
+        case .great:              return .green
+        case .good, .best:       return Color(hex: "60c060")
+        case .inaccuracy:        return Color(hex: "ffa500")
+        case .mistake:            return .orange
+        case .blunder:            return .red
         case .interesting, .dubious: return .gray
         }
     }
@@ -171,12 +163,10 @@ final class CoachViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isVisible = false
 
-    private var engine: ChessEngine?
-    private var coachEngine: CoachEngine?
+    private let coachManager: CoachManager
 
-    func configure(engine: ChessEngine) {
-        self.engine = engine
-        self.coachEngine = CoachEngine(engine: engine)
+    init(coachManager: CoachManager) {
+        self.coachManager = coachManager
     }
 
     /// Generate coach explanation for a move that was just played.
@@ -187,13 +177,11 @@ final class CoachViewModel: ObservableObject {
         engineEval: EngineLine,
         engineCandidates: [EngineLine]
     ) {
-        guard let coach = coachEngine else { return }
-
         isLoading = true
         messages = []
 
         Task {
-            let explanations = coach.generateMoveExplanation(
+            let explanations = await coachManager.generateMoveExplanation(
                 move: move,
                 position: position,
                 engineEval: engineEval,
@@ -211,33 +199,5 @@ final class CoachViewModel: ObservableObject {
 
     func dismiss() {
         isVisible = false
-    }
-}
-
-// MARK: - Color Extension
-
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (255, 0, 0, 0)
-        }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
     }
 }

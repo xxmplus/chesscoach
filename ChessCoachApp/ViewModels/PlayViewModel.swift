@@ -32,15 +32,16 @@ final class PlayViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private weak var engine: ChessEngine?
-    private var coachEngine: CoachEngine?
+    private var coachManager: CoachManager?
 
     // MARK: - Setup
 
     func setEngine(_ engine: ChessEngine?) {
         self.engine = engine
-        if let e = engine {
-            self.coachEngine = CoachEngine(engine: e)
-        }
+    }
+
+    func setCoachManager(_ manager: CoachManager?) {
+        self.coachManager = manager
     }
 
     // MARK: - Position Loading
@@ -126,7 +127,6 @@ final class PlayViewModel: ObservableObject {
     /// Runs multi-line analysis and generates coach messages for the user's last move.
     private func generateCoachExplanation(for move: Move, positionBefore: Position) {
         guard let eng = engine, eng.isAvailable else { return }
-        guard let coach = coachEngine else { return }
 
         isGeneratingExplanation = true
         coachMessages = []
@@ -158,22 +158,26 @@ final class PlayViewModel: ObservableObject {
                     }
 
                     let evalLine = allLines.first(where: { $0.depth >= 1 })
-                    let explanations = coach.generateMoveExplanation(
-                        move: move,
-                        position: positionBefore,
-                        engineEval: evalLine ?? EngineLine(
-                            depth: 1,
-                            score: EngineScore.cp(0),
-                            moves: [],
-                            pv: ""
-                        ),
-                        engineCandidates: Array(allLines.prefix(5)),
-                        bestMove: bestMoveObj
+                    let engineEval = evalLine ?? EngineLine(
+                        depth: 1,
+                        score: EngineScore.cp(0),
+                        moves: [],
+                        pv: ""
                     )
 
-                    self.coachMessages = explanations
-                    self.showCoach = true
-                    self.isGeneratingExplanation = false
+                    Task { @MainActor in
+                        let explanations = await self.coachManager?.generateMoveExplanation(
+                            move: move,
+                            position: positionBefore,
+                            engineEval: engineEval,
+                            engineCandidates: Array(allLines.prefix(5)),
+                            bestMove: bestMoveObj
+                        ) ?? []
+
+                        self.coachMessages = explanations
+                        self.showCoach = !explanations.isEmpty
+                        self.isGeneratingExplanation = false
+                    }
                 },
                 receiveValue: { (line: EngineLine) in
                     if !allLines.contains(where: { $0.depth == line.depth && $0.moves == line.moves }) {
@@ -188,9 +192,9 @@ final class PlayViewModel: ObservableObject {
     private func scoreValue(_ score: EngineScore) -> Double {
         switch score {
         case .cp(let cp):          return Double(cp)
-        case .mate(let m):         return m > 0 ? 10000 - Double(m) * 10 : -10000 - Double(m) * 10
+        case .mate(let m):        return m > 0 ? 10000 - Double(m) * 10 : -10000 - Double(m) * 10
         case .upperBound(let cp):  return Double(cp)
-        case .lowerBound(let cp):  return Double(cp)
+        case .lowerBound(let cp): return Double(cp)
         }
     }
 

@@ -28,8 +28,17 @@
     The wasm file path is resolved via Module.locateFile().
     All UCI output is forwarded to Swift via webkit.messageHandlers.stockfish.
   -->
-  <script src="stockfish.js"></script>
-  <script src="stockfish.wasm.js"></script>
+  <script>
+    // Must be set BEFORE stockfish.js loads — Emscripten reads these at init time
+    Module = {
+      locateFile: function (file) {
+        // assetsURL points to app bundle root; Assets/stockfish/ is relative to it
+        return 'Assets/stockfish/' + file;
+      }
+    };
+  </script>
+  <script src="Assets/stockfish/stockfish.js"></script>
+  <script src="Assets/stockfish/stockfish.wasm.js"></script>
   <script>
     (function () {
       var handler = window.webkit && window.webkit.messageHandlers

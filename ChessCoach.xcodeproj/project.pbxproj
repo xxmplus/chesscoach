@@ -21,6 +21,7 @@
 		2813FCA2341CE2F155E916CB /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560A53EE109A108AA642EFB /* ProgressViewModel.swift */; };
 		294EB8FF7C0DEB84C3877083 /* EngineLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D6957549329BADF4D33772 /* EngineLine.swift */; };
 		2B98CDAA2257C8CB37C8310B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108C2B882209B81670076696 /* Theme.swift */; };
+		2DA174DAD39DC8B3AB15543E /* CoachManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D312F89AAFB585BC74506B7 /* CoachManager.swift */; };
 		304A822D99E02DD01EE07E59 /* ChessCoachEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; };
 		31A912084662392C71452778 /* UCIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD3401035E0B54A578DCBA2 /* UCIParser.swift */; };
 		32323CED7552F0A7139FC1CE /* Lc0Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */; };
@@ -144,6 +145,7 @@
 		46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lc0Adapter.swift; sourceTree = "<group>"; };
 		514E019DDA37BE1EEAB6A6B4 /* CoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachView.swift; sourceTree = "<group>"; };
 		53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachCoach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D312F89AAFB585BC74506B7 /* CoachManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachManager.swift; sourceTree = "<group>"; };
 		6310C324F8A783AFB0AA86F9 /* EvaluationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationBar.swift; sourceTree = "<group>"; };
 		692740E0A12666EAB133B8D7 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesView.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */,
+				5D312F89AAFB585BC74506B7 /* CoachManager.swift */,
 				29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */,
 				890B0BCD55FBEE5544AE7D49 /* Info.plist */,
 				3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */,
@@ -636,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADEC01388A95D8DBAF78A84 /* CoachEngine.swift in Sources */,
+				2DA174DAD39DC8B3AB15543E /* CoachManager.swift in Sources */,
 				D70A277359D05CD8E2ABEABF /* ContentLoader.swift in Sources */,
 				4173ED4C8BA070C3E1A2DA5C /* LLMCoachEngine.swift in Sources */,
 				69B20FCD5A498FD42773AEFC /* LessonLibrary.swift in Sources */,

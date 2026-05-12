@@ -6,14 +6,17 @@ import ChessCoachShared
 @main
 struct ChessCoachApp: App {
     @StateObject private var engineManager = EngineManager.shared
+    @StateObject private var coachManager = CoachManager()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark)
                 .environmentObject(engineManager)
+                .environmentObject(coachManager)
                 .task {
                     await engineManager.initialize()
+                    await coachManager.initialize()
                 }
         }
     }

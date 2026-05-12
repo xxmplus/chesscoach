@@ -5,6 +5,7 @@ import ChessCoachCoach
 
 struct PlayView: View {
     @EnvironmentObject private var engineManager: EngineManager
+    @EnvironmentObject private var coachManager: CoachManager
     @StateObject private var vm = PlayViewModel()
     @State private var showEnginePanel = false
 
@@ -137,6 +138,14 @@ struct PlayView: View {
             }
             .onAppear {
                 vm.setEngine(engineManager.engine)
+                vm.setCoachManager(coachManager)
+            }
+            .sheet(isPresented: $vm.showCoach) {
+                CoachView(
+                    messages: vm.coachMessages,
+                    onDismiss: { vm.dismissCoach() },
+                    onShowHint: { /* TODO */ }
+                )
             }
         }
     }
