@@ -1271,7 +1271,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.<YOUR_NAME>.chesscoach";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1324,7 +1324,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.<YOUR_NAME>.chesscoach.tests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TESTED_PRODUCT_NAME = ChessCoachApp;
@@ -1403,7 +1403,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.<YOUR_NAME>.chesscoach.tests";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TESTED_PRODUCT_NAME = ChessCoachApp;
@@ -1440,7 +1440,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.<YOUR_NAME>.chesscoach";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
