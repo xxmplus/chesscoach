@@ -54,6 +54,7 @@
 		AF47A7CE5B1B38BCC744B537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F834BE376D2740E5D8B41888 /* Assets.xcassets */; };
 		B2FDEBCA859B44067ABF0F89 /* SwiftLlama in Frameworks */ = {isa = PBXBuildFile; productRef = 76B8912AD39CE7A5CCF48E3C /* SwiftLlama */; };
 		B54AC2C6EA1FF3D11E00CB6E /* ProgressTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */; };
+		BB39ACAC6AF8102D4F708B35 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = EFBF01B69A01829087EA76BD /* Models */; };
 		C0DC6EB90F16894048AAB100 /* PuzzlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */; };
 		CA0E0763D1CEC51FA872F64C /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CA64224D6433A300221DD88F /* SQLite */; };
 		CAF15441ACEF04FEEA8ACCF8 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2909EAFC5A311AA765A3EA /* PuzzleViewModel.swift */; };
@@ -181,6 +182,7 @@
 		E5AA508611DE7C1489147A17 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StockfishLoader.html; sourceTree = "<group>"; };
 		ECD3401035E0B54A578DCBA2 /* UCIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCIParser.swift; sourceTree = "<group>"; };
+		EFBF01B69A01829087EA76BD /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = ChessCoachShared/Models; sourceTree = SOURCE_ROOT; };
 		F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = stockfish.js; sourceTree = "<group>"; };
 		F834BE376D2740E5D8B41888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDACC3730AE7325360BE41DA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -252,9 +254,17 @@
 			path = Board;
 			sourceTree = "<group>";
 		};
+		0D07BF135C12ADC65641599A /* Qwen2.5-3B-Instruct-GGUF */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Qwen2.5-3B-Instruct-GGUF";
+			sourceTree = "<group>";
+		};
 		11AC94CF52968AE85FBA40A3 = {
 			isa = PBXGroup;
 			children = (
+				EFBF01B69A01829087EA76BD /* Models */,
 				E7C334D238888E5B6B1328AC /* ChessCoachApp */,
 				025529FFD81177D89C24EC78 /* ChessCoachCoach */,
 				CA0E27E3D1C269EFD42EEA8C /* ChessCoachEngine */,
@@ -271,6 +281,7 @@
 				BF1A3D753A5E71CAA4F56A0F /* Position.swift */,
 				7EE497B52C584992BA8FA4D3 /* Square.swift */,
 				108C2B882209B81670076696 /* Theme.swift */,
+				0D07BF135C12ADC65641599A /* Qwen2.5-3B-Instruct-GGUF */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -448,6 +459,7 @@
 			buildConfigurationList = E60D69705894AFE53159C160 /* Build configuration list for PBXNativeTarget "ChessCoachShared" */;
 			buildPhases = (
 				5B1F60B59097376BC2E99E26 /* Sources */,
+				B3ADE2D8AF356B4D5FFECF0E /* Resources */,
 				B6420997E86CD598B500821C /* Frameworks */,
 			);
 			buildRules = (
@@ -574,6 +586,14 @@
 				761889E722DC286EBFB36B22 /* stockfish.js in Resources */,
 				570CDA6F2A735B12EBC663FE /* stockfish.wasm in Resources */,
 				95D90B98E105E993E76F43E8 /* stockfish.wasm.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3ADE2D8AF356B4D5FFECF0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB39ACAC6AF8102D4F708B35 /* Models in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

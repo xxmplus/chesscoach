@@ -31,6 +31,13 @@ targets:
       - path: ChessCoachShared
         excludes:
           - "**/.DS_Store"
+          - "**/*.gguf"
+      - path: ChessCoachShared/Models
+        type: folder
+        buildPhase: resources
+        excludes:
+          - "**/.DS_Store"
+          - "**/*.swift"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.shared
