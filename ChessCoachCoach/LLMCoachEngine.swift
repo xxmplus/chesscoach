@@ -4,7 +4,7 @@ import ChessCoachEngine
 
 // MARK: - LLMCoachEngine
 
-/// A coach engine that uses a local LLM (Qwen2.5-3B or SmolLM2) to generate
+/// A coach engine that uses a local LLM (DeepSeek-R1 Distill Qwen-1.5B) to generate
 /// natural language explanations from structured engine analysis.
 public final class LLMCoachEngine: @unchecked Sendable {
 

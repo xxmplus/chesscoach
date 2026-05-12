@@ -122,10 +122,10 @@ public final class CoachManager: ObservableObject {
 
     public var deviceTierDescription: String {
         switch deviceTier {
-        case .iPhone13:   return "iPhone 13 (A15) — SmolLM2 recommended"
-        case .iPhone14:   return "iPhone 14 (A15/A16) — SmolLM2 recommended"
-        case .iPhone15ProOrLater: return "iPhone 15 Pro+ (A17+) — Qwen2.5-3B recommended"
-        case .other:      return "iPad / Unknown — SmolLM2 recommended"
+        case .iPhone13:   return "iPhone 13 (A15) — DeepSeek-R1 recommended"
+        case .iPhone14:   return "iPhone 14 (A15/A16) — DeepSeek-R1 recommended"
+        case .iPhone15ProOrLater: return "iPhone 15 Pro+ (A17+) — DeepSeek-R1 recommended"
+        case .other:      return "iPad / Unknown — DeepSeek-R1 recommended"
         }
     }
 }

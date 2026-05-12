@@ -42,7 +42,6 @@
 		72912E2EF7C46BED181DD70B /* ChessBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429CE764FDA01154525A997 /* ChessBoardView.swift */; };
 		761889E722DC286EBFB36B22 /* stockfish.js in Resources */ = {isa = PBXBuildFile; fileRef = F14A0DB4A7C0F82ABDEDEF41 /* stockfish.js */; };
 		7CD8D15DD9732F4521CE4A2C /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */; };
-		8372475B74CE968C894F3AA7 /* LLMServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */; };
 		8F031C9A043BC59DE41DD2A8 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE497B52C584992BA8FA4D3 /* Square.swift */; };
 		95D90B98E105E993E76F43E8 /* stockfish.wasm.js in Resources */ = {isa = PBXBuildFile; fileRef = 3EBCC9A41A4DE3AB5272ADD9 /* stockfish.wasm.js */; };
 		A219EB1BAC6351BBCA7A09E8 /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692740E0A12666EAB133B8D7 /* Badges.swift */; };
@@ -65,7 +64,6 @@
 		DF5BDC640FA15C21B251EB8E /* ModelDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB077614566820ADE2D19280 /* ModelDownloadService.swift */; };
 		E0FDB0F71DF8A9EAF9624D30 /* LessonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38DCCCC341931FC44BC1BD9 /* LessonDetailView.swift */; };
 		EE80157B17B5CD87EAD4A327 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1A3D753A5E71CAA4F56A0F /* Position.swift */; };
-		EF377DC6039C69D6DA01B1AF /* LLMChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72072999B27DC48C2FC17A10 /* LLMChatService.swift */; };
 		F3FEDAA1F9C38D516C97A46F /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,7 +149,6 @@
 		692740E0A12666EAB133B8D7 /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesView.swift; sourceTree = "<group>"; };
 		7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEngine.swift; sourceTree = "<group>"; };
-		72072999B27DC48C2FC17A10 /* LLMChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMChatService.swift; sourceTree = "<group>"; };
 		7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalInferenceConfig.swift; sourceTree = "<group>"; };
 		7EE497B52C584992BA8FA4D3 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockfishAdapter.swift; sourceTree = "<group>"; };
@@ -159,7 +156,6 @@
 		890B0BCD55FBEE5544AE7D49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		90AFFED25F5AC0E733EBC27B /* CoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachEngine.swift; sourceTree = "<group>"; };
 		91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMCoachEngine.swift; sourceTree = "<group>"; };
-		9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMServerManager.swift; sourceTree = "<group>"; };
 		A1EB255DC2E984F11DCCE107 /* ProgressTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTracker.swift; sourceTree = "<group>"; };
 		A6088348CF9E9FD33BC01B7B /* LLMService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLMService.swift; sourceTree = "<group>"; };
 		A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -373,8 +369,6 @@
 				D9D6957549329BADF4D33772 /* EngineLine.swift */,
 				D5250437B4FE13187F4AA89F /* Info.plist */,
 				46CDA22479BE12A37BD905BC /* Lc0Adapter.swift */,
-				72072999B27DC48C2FC17A10 /* LLMChatService.swift */,
-				9FFE7BF1B2033E3B775844A0 /* LLMServerManager.swift */,
 				A6088348CF9E9FD33BC01B7B /* LLMService.swift */,
 				817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */,
 				E4DD98A3E98C8A624C13F28E /* SwiftLlamaAdapter.swift */,
@@ -613,8 +607,6 @@
 			files = (
 				091F8784B5D47CFD06508B27 /* ChessEngine.swift in Sources */,
 				294EB8FF7C0DEB84C3877083 /* EngineLine.swift in Sources */,
-				EF377DC6039C69D6DA01B1AF /* LLMChatService.swift in Sources */,
-				8372475B74CE968C894F3AA7 /* LLMServerManager.swift in Sources */,
 				0D6DE5780EAF887F17B37E53 /* LLMService.swift in Sources */,
 				32323CED7552F0A7139FC1CE /* Lc0Adapter.swift in Sources */,
 				4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */,

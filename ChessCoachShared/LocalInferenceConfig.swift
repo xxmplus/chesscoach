@@ -54,15 +54,6 @@ public struct ModelConfig: Equatable, Sendable {
         chatTemplate: "chatml"
     )
 
-    /// SmolLM2-1.7B — fallback for devices that can't run DeepSeek-R1.
-    public static let smolLM2_1_7B = ModelConfig(
-        repoId: "swissbase/SmolLM2-1.7B-Instruct-GGUF",
-        fileName: "smollm2-1.7b-instruct-q4_k_m.gguf",
-        displayName: "SmolLM2-1.7B Instruct",
-        bundleSizeMB: 950,
-        estimatedTokensPerSecond: 25,
-        chatTemplate: "chatml"
-    )
 }
 
 /// Detects the current device tier from hardware identifier.
