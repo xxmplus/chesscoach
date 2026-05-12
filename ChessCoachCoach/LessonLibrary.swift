@@ -45,7 +45,7 @@ public struct Lesson: Identifiable, Codable {
         public var icon: String {
             switch self {
             case .opening:   return "book.fill"
-            case .middlegame: return "figure.chess"
+            case .middlegame: return "person.fill"
             case .endgame:   return "circle.hexagongrid.fill"
             }
         }

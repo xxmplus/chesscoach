@@ -102,7 +102,7 @@ struct LessonDetailView: View {
 
     private func handleMove(_ move: Move) {
         attempts += 1
-        if var pos = Optional(position), currentPositionIndex < lesson.positions.count {
+        if currentPositionIndex < lesson.positions.count {
             let lp = lesson.positions[currentPositionIndex]
             if let guidedMoves = lp.moves, !guidedMoves.isEmpty {
                 // Guided lesson: check if this move matches expected

@@ -24,6 +24,12 @@ final class PuzzleViewModel: ObservableObject {
     private let loader = ContentLoader.shared
     private var cancellables = Set<AnyCancellable>()
 
+    /// The color the human player is playing in this puzzle.
+    /// Always the side-to-move in the FEN (the one whose move it is at the start).
+    var playerColor: PieceColor {
+        position.turn
+    }
+
     init() {
         loadNextPuzzle()
     }
@@ -62,6 +68,11 @@ final class PuzzleViewModel: ObservableObject {
                 feedbackMessage = "Puzzle complete!"
                 feedbackType = .correct
             } else {
+                // Apply the opponent's response (the move at the current attemptIndex)
+                if engine.attemptIndex < currentPuzzle?.solution.count ?? 0,
+                   let opponentMove = currentPuzzle?.solution[engine.attemptIndex] {
+                    applyOpponentMove(opponentMove)
+                }
                 feedbackMessage = "Good move. Find the next move."
                 feedbackType = .correct
             }
@@ -69,6 +80,8 @@ final class PuzzleViewModel: ObservableObject {
             feedbackMessage = "Not this move. Try again or use a hint."
             feedbackType = .wrong
             attemptCount += 1
+            // Revert the invalid move — reset to the state before the user's move
+            revertLastMove()
             // Show engine-preferred line
             showEngineLine(for: move)
         case .hintRequested:
@@ -86,6 +99,22 @@ final class PuzzleViewModel: ObservableObject {
     func skipPuzzle() {
         ProgressTracker().puzzleFailed(rating: currentPuzzle?.rating ?? 1000, themes: currentPuzzle?.themes ?? [])
         loadNextPuzzle()
+    }
+
+    /// Reverts to the start of the current move sequence, discarding any partial
+    /// user move that was just applied to the board.
+    func revertLastMove() {
+        guard let puzzle = currentPuzzle else { return }
+        position = Position(fen: puzzle.fen)
+        // Rebuild engine state to match
+        engine.reset()
+    }
+
+    private func applyOpponentMove(_ uci: String) {
+        var newPos = position
+        if newPos.makeMove(uci: uci) {
+            position = newPos
+        }
     }
 
     private func showEngineLine(for move: String) {

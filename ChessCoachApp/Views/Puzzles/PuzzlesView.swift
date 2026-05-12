@@ -77,7 +77,8 @@ struct PuzzlesView: View {
             onMove: { move in
                 let uci = move.from.description + move.to.description
                 vm.submitMove(uci)
-            }
+            },
+            playerColor: vm.playerColor
         )
         .frame(maxWidth: 380)
         .frame(height: 380)
@@ -104,6 +105,21 @@ struct PuzzlesView: View {
     @ViewBuilder
     private var buttonRow: some View {
         HStack(spacing: 16) {
+            if vm.feedbackType == .wrong {
+                Button {
+                    vm.revertLastMove()
+                    vm.feedbackMessage = nil
+                    vm.feedbackType = nil
+                } label: {
+                    Label("Try Again", systemImage: "arrow.uturn.backward")
+                        .font(.subheadline.bold())
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(theme.accent)
+                        .cornerRadius(8)
+                }
+            }
             hintButton
             skipButton
         }

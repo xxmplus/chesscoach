@@ -9,6 +9,9 @@ public struct ChessBoardView: View {
     let interactive: Bool
     let engineLines: [EngineLine]
     let onMove: ((Move) -> Void)?
+    /// Restricts interaction to this color only. Nil means any legal piece can be moved
+    /// (normal play mode). In puzzle mode this should match the FEN side-to-move.
+    let playerColor: PieceColor?
 
     private let theme = ChessTheme.midnightStudy
     @State private var selectedSquare: Square?
@@ -20,12 +23,14 @@ public struct ChessBoardView: View {
         position: Binding<Position>,
         interactive: Bool = true,
         engineLines: [EngineLine] = [],
-        onMove: ((Move) -> Void)? = nil
+        onMove: ((Move) -> Void)? = nil,
+        playerColor: PieceColor? = nil
     ) {
         self._position = position
         self.interactive = interactive
         self.engineLines = engineLines
         self.onMove = onMove
+        self.playerColor = playerColor
     }
 
     public var body: some View {
@@ -128,16 +133,20 @@ public struct ChessBoardView: View {
                 position = newPos
                 onMove?(move)
             } else if position.piece(at: square) != nil {
-                selectedSquare = square
-                legalDestinations = moves.map { $0.to }
+                if playerColor == nil || position.piece(at: square)?.color == playerColor {
+                    selectedSquare = square
+                    legalDestinations = moves.map { $0.to }
+                }
             } else {
                 selectedSquare = nil
                 legalDestinations = []
             }
         } else {
             if position.piece(at: square) != nil {
-                selectedSquare = square
-                legalDestinations = position.legalMoves(from: square).map { $0.to }
+                if playerColor == nil || position.piece(at: square)?.color == playerColor {
+                    selectedSquare = square
+                    legalDestinations = position.legalMoves(from: square).map { $0.to }
+                }
             }
         }
     }
@@ -152,7 +161,8 @@ public struct ChessBoardView: View {
                     let clampedRank = max(0, min(7, rank))
                     let sq = Square(file: clampedFile, rank: clampedRank)
                     guard let piece = position.piece(at: sq),
-                          piece.color == position.turn else { return }
+                          piece.color == position.turn,
+                          playerColor == nil || piece.color == playerColor else { return }
                     selectedSquare = sq
                     draggedPiece = (sq, piece)
                     legalDestinations = position.legalMoves(from: sq).map { $0.to }
@@ -271,7 +281,6 @@ struct EngineArrowsOverlay: View {
         let angle = atan2(dy, dx)
         let length = sqrt(dx*dx + dy*dy)
         let headLen = min(30.0, length * 0.3)
-        let headW = headLen * 0.5
 
         let endX = to.x - cos(angle) * headLen * 0.5
         let endY = to.y - sin(angle) * headLen * 0.5
