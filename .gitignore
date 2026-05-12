@@ -1,0 +1,72 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+
+# Xcode build products
+build/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+# Keep Package.resolved tracked for reproducible app builds.
+
+# XcodeGen / generated caches
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Test and coverage outputs
+*.xcresult
+coverage/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# CocoaPods / Carthage if introduced later
+Pods/
+Carthage/Build/
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.mobileprovision
+*.cer
+*.p12
+
+# Logs and temp files
+*.log
+tmp/
+.temp/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large local model experiments
+# Keep the active bundled model tracked under ChessCoachShared/Models/.
+*.gguf.tmp
+*.gguf.download
+Models-archive/
