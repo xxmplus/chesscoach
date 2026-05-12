@@ -254,13 +254,6 @@
 			path = Board;
 			sourceTree = "<group>";
 		};
-		0D07BF135C12ADC65641599A /* Qwen2.5-3B-Instruct-GGUF */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Qwen2.5-3B-Instruct-GGUF";
-			sourceTree = "<group>";
-		};
 		11AC94CF52968AE85FBA40A3 = {
 			isa = PBXGroup;
 			children = (
@@ -281,7 +274,6 @@
 				BF1A3D753A5E71CAA4F56A0F /* Position.swift */,
 				7EE497B52C584992BA8FA4D3 /* Square.swift */,
 				108C2B882209B81670076696 /* Theme.swift */,
-				0D07BF135C12ADC65641599A /* Qwen2.5-3B-Instruct-GGUF */,
 			);
 			path = Models;
 			sourceTree = "<group>";

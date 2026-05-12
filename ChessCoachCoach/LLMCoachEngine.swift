@@ -18,7 +18,7 @@ public final class LLMCoachEngine: @unchecked Sendable {
     }
 
     public init(
-        modelConfig: ModelConfig = .qwen2_5_3B,
+        modelConfig: ModelConfig = .deepseekR1_Qwen_1_5B,
         llmService: any LLMService,
         serverManager: (any LLMServerManager)? = nil
     ) {

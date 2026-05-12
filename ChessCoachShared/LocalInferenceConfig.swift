@@ -15,16 +15,11 @@ public enum DeviceTier {
     case other
 
     public var recommendedModel: ModelConfig {
-        switch self {
-        case .iPhone13:
-            return .smolLM2_1_7B
-        case .iPhone14:
-            return .smolLM2_1_7B
-        case .iPhone15ProOrLater:
-            return .qwen2_5_3B
-        case .other:
-            return .smolLM2_1_7B
-        }
+        // All tiers use the same model — DeepSeek-R1-1.5B is small enough
+        // to run well even on older devices, and its step-by-step reasoning
+        // chain produces significantly better coaching explanations than
+        // comparable-sized models.
+        .deepseekR1_Qwen_1_5B
     }
 }
 
@@ -46,19 +41,20 @@ public struct ModelConfig: Equatable, Sendable {
         "https://huggingface.co/\(repoId)/tree/main"
     }
 
-    /// Qwen2.5-3B Instruct — best quality for chess coaching explanations.
-    /// ~1.9GB (Q4_K_M), ~20 tok/s on iPhone 15 Pro.
-    public static let qwen2_5_3B = ModelConfig(
-        repoId: "Qwen/Qwen2.5-3B-Instruct-GGUF",
-        fileName: "qwen2.5-3b-instruct-q4_k_m.gguf",
-        displayName: "Qwen2.5-3B Instruct",
-        bundleSizeMB: 2060,
-        estimatedTokensPerSecond: 20,
+    /// DeepSeek-R1 Distill (Qwen-1.5B) — best for chess coaching explanations.
+    /// The R1 reasoning chain produces natural step-by-step move explanations,
+    /// far superior to vanilla instruction-tuned models at this size.
+    /// ~1.0GB (Q4_K_M), ~20-25 tok/s on iPhone 15 Pro.
+    public static let deepseekR1_Qwen_1_5B = ModelConfig(
+        repoId: "unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF",
+        fileName: "DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf",
+        displayName: "DeepSeek-R1 Distill (1.5B)",
+        bundleSizeMB: 1065,
+        estimatedTokensPerSecond: 22,
         chatTemplate: "chatml"
     )
 
-    /// SmolLM2-1.7B — smaller, faster, decent quality.
-    /// ~950MB (Q4_K_M), ~25 tok/s on iPhone 15 Pro.
+    /// SmolLM2-1.7B — fallback for devices that can't run DeepSeek-R1.
     public static let smolLM2_1_7B = ModelConfig(
         repoId: "swissbase/SmolLM2-1.7B-Instruct-GGUF",
         fileName: "smollm2-1.7b-instruct-q4_k_m.gguf",
