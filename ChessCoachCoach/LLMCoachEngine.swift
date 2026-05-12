@@ -11,7 +11,6 @@ public final class LLMCoachEngine: @unchecked Sendable {
     private let llmService: any LLMService
     private let templateEngine: CoachEngine
     private let modelConfig: ModelConfig
-    private let serverManager: (any LLMServerManager)?
 
     public var isReady: Bool {
         llmService.isReady
@@ -19,31 +18,22 @@ public final class LLMCoachEngine: @unchecked Sendable {
 
     public init(
         modelConfig: ModelConfig = .deepseekR1_Qwen_1_5B,
-        llmService: any LLMService,
-        serverManager: (any LLMServerManager)? = nil
+        llmService: any LLMService
     ) {
         self.llmService = llmService
         self.templateEngine = CoachEngine()
         self.modelConfig = modelConfig
-        self.serverManager = serverManager
     }
 
     // MARK: - Lifecycle
 
     /// Start the LLM server and load the model.
     public func start() async throws {
-        if let manager = serverManager {
-            let modelPath = ModelDownloadService().modelPath(for: modelConfig).path
-            _ = try await manager.start(modelPath: modelPath)
-        }
         try await llmService.loadModel()
     }
 
     /// Stop the LLM server and free memory.
     public func stop() async {
-        if let manager = serverManager {
-            await manager.stop()
-        }
         await llmService.unloadModel()
     }
 

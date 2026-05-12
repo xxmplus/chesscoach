@@ -54,6 +54,27 @@ targets:
         CFBundleVersion: "1"
         NSPrincipalClass: ""
 
+  ChessCoachSharedTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ChessCoachSharedTests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.shared.tests
+        INFOPLIST_FILE: ChessCoachSharedTests/Info.plist
+        TESTED_PRODUCT_NAME: ChessCoachShared
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: ChessCoachShared
+    info:
+      path: ChessCoachSharedTests/Info.plist
+      properties:
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+
   ChessCoachEngine:
     type: framework
     platform: iOS
@@ -78,6 +99,27 @@ targets:
         CFBundleVersion: "1"
         NSPrincipalClass: ""
 
+  ChessCoachEngineTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ChessCoachEngineTests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.engine.tests
+        INFOPLIST_FILE: ChessCoachEngineTests/Info.plist
+        TESTED_PRODUCT_NAME: ChessCoachEngine
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: ChessCoachEngine
+    info:
+      path: ChessCoachEngineTests/Info.plist
+      properties:
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+
   ChessCoachCoach:
     type: framework
     platform: iOS
@@ -101,6 +143,27 @@ targets:
         CFBundleShortVersionString: "1.0"
         CFBundleVersion: "1"
         NSPrincipalClass: ""
+
+  ChessCoachCoachTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ChessCoachCoachTests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.coach.tests
+        INFOPLIST_FILE: ChessCoachCoachTests/Info.plist
+        TESTED_PRODUCT_NAME: ChessCoachCoach
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: ChessCoachCoach
+    info:
+      path: ChessCoachCoachTests/Info.plist
+      properties:
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
 
   ChessCoachApp:
     type: application

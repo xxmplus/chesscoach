@@ -76,8 +76,7 @@ public final class CoachManager: ObservableObject {
             try await adapter.loadModel()
             self.llmEngine = LLMCoachEngine(
                 modelConfig: modelConfig,
-                llmService: adapter,
-                serverManager: nil  // macOS only
+                llmService: adapter
             )
             self.isLLMAvailable = true
         } catch {

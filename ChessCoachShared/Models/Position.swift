@@ -39,7 +39,9 @@ public struct Position {
 
     public var fen: String {
         var rows: [String] = []
-        for rank in 0..<8 {
+        // board[0] = rank 1 (white's back rank); board[7] = rank 8 (black's back rank)
+        // FEN requires rank 8 first → iterate board[7] down to board[0]
+        for rank in (0..<8).reversed() {
             var row = ""
             var empty = 0
             for file in 0..<8 {
@@ -56,9 +58,20 @@ public struct Position {
         }
         let placement = rows.joined(separator: "/")
         let color = turn == .white ? "w" : "b"
-        let castlingStr = castling.isEmpty ? "-" : castling
+        let normalized = normalizedCastling()
+        let castlingStr = normalized.isEmpty ? "-" : normalized
         let epStr = enPassant ?? "-"
         return "\(placement) \(color) \(castlingStr) \(epStr) \(halfmoveClock) \(fullmoveNumber)"
+    }
+
+    /// Returns castling rights in standard FEN order: white (KQ) then black (kq).
+    private func normalizedCastling() -> String {
+        var result = ""
+        if castling.contains("K") { result += "K" }
+        if castling.contains("Q") { result += "Q" }
+        if castling.contains("k") { result += "k" }
+        if castling.contains("q") { result += "q" }
+        return result
     }
 
     // MARK: - Initializers
@@ -354,8 +367,10 @@ public struct Position {
         if uci.count > 4, let pChar = uci.last {
             promotion = PieceKind(rawValue: String(pChar).uppercased())
         } else {
-            if let p = piece(at: from), p.kind == .pawn && (to.rank == 7 || to.rank == 0) {
-                promotion = .queen
+            if let p = piece(at: from), p.kind == .pawn {
+                let promoRow = (p.color == .white) ? 7 : 0
+                if to.rank == promoRow { promotion = .queen }
+                else { promotion = nil }
             } else {
                 promotion = nil
             }
@@ -442,8 +457,9 @@ public struct Position {
         castling = state.castling
         enPassant = state.enPassant
         halfmoveClock = state.halfmoveClock
+        let previousTurn = turn
         turn = turn == .white ? .black : .white
-        if turn == .white { fullmoveNumber = max(1, fullmoveNumber - 1) }
+        if previousTurn == .black { fullmoveNumber = max(1, fullmoveNumber - 1) }
     }
 
     public mutating func setFen(_ fen: String) {
