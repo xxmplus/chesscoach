@@ -142,7 +142,7 @@ Default model metadata:
 - Approximate size: 1.0 GB
 - Intended role: explain engine output in clear language, not replace the chess engine
 
-The GGUF binary is intentionally not committed to the repository. The app can download the configured model at runtime, or developers can place a local `.gguf` file under `ChessCoachShared/Models/` for their own private build. See `ChessCoachShared/Models/README.md` for exact instructions.
+The GGUF binary is not committed to the repository — it is downloaded automatically by the build bootstrap script. The build will fail before compilation if the model is missing, with a clear message telling you to run `scripts/bootstrap.sh`. See [`ChessCoachShared/Models/README.md`](ChessCoachShared/Models/README.md) for details on the model and how to swap it.
 
 Important behavior:
 
@@ -210,7 +210,19 @@ These steps install the development build directly onto your iPhone.
 cd /Users/friday/ssd/workspaces/chesscoach
 ```
 
-### Step 2 — Install XcodeGen if needed
+### Step 2 — Download build dependencies
+
+Before building, download Stockfish WASM and the LLM model (~1 GB total):
+
+```bash
+./scripts/bootstrap.sh
+```
+
+This is a one-time step after cloning. It downloads the Stockfish engine assets and the DeepSeek-R1 GGUF model into the project tree so the build can include them in the app bundle.
+
+**For CI / automated builds**, use `./scripts/bootstrap.sh --fetch` to download without prompts.
+
+### Step 3 — Install XcodeGen if needed
 
 If `xcodegen` is not installed:
 
@@ -218,7 +230,7 @@ If `xcodegen` is not installed:
 brew install xcodegen
 ```
 
-### Step 3 — Generate the Xcode project
+### Step 4 — Generate the Xcode project
 
 ```bash
 xcodegen generate
@@ -230,20 +242,20 @@ This creates/updates:
 ChessCoach.xcodeproj
 ```
 
-### Step 4 — Open the project
+### Step 5 — Open the project
 
 ```bash
 open ChessCoach.xcodeproj
 ```
 
-### Step 5 — Connect the iPhone
+### Step 6 — Connect the iPhone
 
 1. Connect the iPhone to the Mac by USB, or use a previously paired wireless device.
 2. Unlock the iPhone.
 3. Trust the Mac if iOS asks.
 4. In Xcode, select the iPhone as the run destination.
 
-### Step 6 — Configure signing
+### Step 7 — Configure signing
 
 In Xcode:
 
@@ -266,7 +278,7 @@ com.<yourname>.chesscoach
 
 For a personal/free Apple ID, the app may need to be reinstalled or re-signed periodically.
 
-### Step 7 — Build and run
+### Step 8 — Build and run
 
 In Xcode, press:
 
@@ -276,7 +288,7 @@ Cmd + R
 
 Xcode will build, sign, install, and launch ChessCoach on the selected iPhone.
 
-### Step 8 — Trust developer profile if needed
+### Step 9 — Trust developer profile if needed
 
 If the iPhone refuses to launch the app:
 
@@ -294,6 +306,11 @@ To verify a simulator build from the command line:
 
 ```bash
 cd /Users/friday/ssd/workspaces/chesscoach
+
+# Download Stockfish WASM and LLM model (~1 GB)
+./scripts/bootstrap.sh
+
+# Generate project and build
 xcodegen generate
 xcodebuild \
   -project ChessCoach.xcodeproj \
@@ -302,6 +319,8 @@ xcodebuild \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
   clean build
 ```
+
+**CI / automated builds:** use `./scripts/bootstrap.sh --fetch` to download all assets without prompts.
 
 To run unit tests:
 
@@ -342,14 +361,14 @@ No account login is currently required by the app. Engine analysis and LLM coach
 
 ### The app does not build
 
-Try regenerating the project:
+The build will fail before compilation if Stockfish or the LLM model are missing. If you see a "Bootstrap failed" message:
 
 ```bash
-cd /Users/friday/ssd/workspaces/chesscoach
+./scripts/bootstrap.sh
 xcodegen generate
 ```
 
-Then reopen `ChessCoach.xcodeproj` and build again.
+Then build again.
 
 ### Xcode says the bundle identifier is unavailable
 
@@ -375,13 +394,14 @@ Settings → General → VPN & Device Management → Trust Developer
 
 ### Engine status is red or analysis does not produce lines
 
-Possible causes:
+If the app was built without running `scripts/bootstrap.sh` first, the Stockfish WASM assets are missing. Run bootstrap and rebuild:
 
-- Engine resource failed to initialize
-- Build did not include required engine assets
-- Running in an environment where the Stockfish bridge/resource is unavailable
+```bash
+./scripts/bootstrap.sh
+xcodegen generate
+```
 
-The rest of the app should still open, but live engine analysis and coach explanations may be limited.
+Then build again. Engine assets are bundled into the app at build time by the bootstrap script.
 
 ### Coach explanations are missing
 
