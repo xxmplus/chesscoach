@@ -32,7 +32,9 @@
 		4173ED4C8BA070C3E1A2DA5C /* LLMCoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B41DB794B1A5D444469ABA /* LLMCoachEngine.swift */; };
 		4192B80C68532B04D198E08C /* ChessCoachCoach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; };
 		48EE2BE4D3DFAD7D22F17605 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D019F540504FBBABC4C2D6B /* AppViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C36372C79B8BBEA5F617D /* AppViewModelTests.swift */; };
 		4DAED6FBF46F83565DB9C2C9 /* StockfishAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C90211F9AAF28CE2582B0 /* StockfishAdapter.swift */; };
+		4E79CF75D06994EEDA9A0FA3 /* CoachInfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056366A34E312C5A8B86FEDB /* CoachInfrastructureTests.swift */; };
 		52F473EE6CEAE29B2F89639A /* LearnViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4B3D6CDC5E79B2DB23F99 /* LearnViewModel.swift */; };
 		570CDA6F2A735B12EBC663FE /* stockfish.wasm in Resources */ = {isa = PBXBuildFile; fileRef = D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */; };
 		5DA8F014D33867979D5F9CB8 /* ChessCoachEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -72,6 +74,7 @@
 		D2DC1FF3F33DFE67798B9AD5 /* EngineLineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E496E3EA75CF9190753BA4 /* EngineLineTests.swift */; };
 		D32B8BD8D87364B8A2351828 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AA508611DE7C1489147A17 /* LearnView.swift */; };
 		D70A277359D05CD8E2ABEABF /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */; };
+		D7524EF21F9B26EA830754A3 /* InfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8690C765E633CB2F81FFCBE /* InfrastructureTests.swift */; };
 		D9749DE504C074FC85C2DA1B /* PuzzleEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FF1577C4FF0D22B9FD73CA /* PuzzleEngineTests.swift */; };
 		DC2BBDBED713DFDC9BCF5356 /* ChessCoachShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF5BDC640FA15C21B251EB8E /* ModelDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB077614566820ADE2D19280 /* ModelDownloadService.swift */; };
@@ -81,6 +84,7 @@
 		F3FEDAA1F9C38D516C97A46F /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 		F4CED1AFCF2B35A3E051AE62 /* ChessCoachShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; };
 		F8154BC6890B28520867CFC3 /* ChessCoachCoach.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FDFF1547FB9DF45CB24F5978 /* EngineInfrastructureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7480124179325FD6FA94F48 /* EngineInfrastructureTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +94,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7C2C15DDF52CF086580BBC96;
 			remoteInfo = ChessCoachEngine;
+		};
+		41F317D9806B3A5FF908EB10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 124564DE0AA899BA2835163C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7608D49E465315B0EF281A0;
+			remoteInfo = ChessCoachApp;
 		};
 		70154CABA02E3368F4CD9F1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -199,9 +210,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		056366A34E312C5A8B86FEDB /* CoachInfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachInfrastructureTests.swift; sourceTree = "<group>"; };
 		0938C823F22C246226233B92 /* OpeningBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningBook.swift; sourceTree = "<group>"; };
 		108C2B882209B81670076696 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1429CE764FDA01154525A997 /* ChessBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessBoardView.swift; sourceTree = "<group>"; };
+		1852D588A5BBD052473B79F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24A5FCBC63676A52DA38338C /* SquareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareTests.swift; sourceTree = "<group>"; };
 		29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
@@ -225,6 +238,7 @@
 		6C6AEA92C4EA9147B78E34C4 /* PuzzlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesView.swift; sourceTree = "<group>"; };
 		70FF1577C4FF0D22B9FD73CA /* PuzzleEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEngineTests.swift; sourceTree = "<group>"; };
 		7141A78081CF3F8C1072F802 /* PuzzleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleEngine.swift; sourceTree = "<group>"; };
+		77CA69F06CBEB0BCEE3AF487 /* ChessCoachAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChessCoachAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8E6A677221BCDC57ABBD03 /* LocalInferenceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalInferenceConfig.swift; sourceTree = "<group>"; };
 		7A9893A96AE3631AADB9F9DC /* ChessCoachEngineTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChessCoachEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EE497B52C584992BA8FA4D3 /* Square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
@@ -242,6 +256,8 @@
 		A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChessCoachEngine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A982F60DEC3252181E9688BF /* ChessCoachCoachTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChessCoachCoachTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9CE9C95248B42CFFC076E27 /* ChessCoachApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChessCoachApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30C36372C79B8BBEA5F617D /* AppViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModelTests.swift; sourceTree = "<group>"; };
+		B8690C765E633CB2F81FFCBE /* InfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrastructureTests.swift; sourceTree = "<group>"; };
 		BDF798A042DC104101468FDB /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		BF1A3D753A5E71CAA4F56A0F /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		BFDEDCF9D866C18A00D254A1 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -254,6 +270,7 @@
 		D38DCCCC341931FC44BC1BD9 /* LessonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDetailView.swift; sourceTree = "<group>"; };
 		D5250437B4FE13187F4AA89F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D72C0FBE6FBCD79D211F1D7C /* ChessCoachApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessCoachApp.swift; sourceTree = "<group>"; };
+		D7480124179325FD6FA94F48 /* EngineInfrastructureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineInfrastructureTests.swift; sourceTree = "<group>"; };
 		D785ED667342AAB65EAD004E /* EnginePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnginePanelView.swift; sourceTree = "<group>"; };
 		D9D6957549329BADF4D33772 /* EngineLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineLine.swift; sourceTree = "<group>"; };
 		DA9557281EB680D0F0CC4D35 /* ChessCoachSharedTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChessCoachSharedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,6 +382,7 @@
 			children = (
 				EFBF01B69A01829087EA76BD /* Models */,
 				E7C334D238888E5B6B1328AC /* ChessCoachApp */,
+				98EA6306B55BD85CE676287E /* ChessCoachAppTests */,
 				025529FFD81177D89C24EC78 /* ChessCoachCoach */,
 				5BB024AC24A7B291AFB100DA /* ChessCoachCoachTests */,
 				CA0E27E3D1C269EFD42EEA8C /* ChessCoachEngine */,
@@ -420,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				D0F0870853AC6D14CCD8FB73 /* CoachEngineTests.swift */,
+				056366A34E312C5A8B86FEDB /* CoachInfrastructureTests.swift */,
 				A15D3574F6CC0AFB237C97BF /* ContentLoaderTests.swift */,
 				8011809182156E4DFB3EB64F /* Info.plist */,
 				5CBAC677FF69C9EC8B938795 /* OpeningBookTests.swift */,
@@ -431,6 +450,7 @@
 		641336452B8B07C1BDF50C82 /* ChessCoachEngineTests */ = {
 			isa = PBXGroup;
 			children = (
+				D7480124179325FD6FA94F48 /* EngineInfrastructureTests.swift */,
 				49E496E3EA75CF9190753BA4 /* EngineLineTests.swift */,
 				5261570A8C3D37B349213208 /* Info.plist */,
 				ED25F71CBB05C2D7C581C892 /* UCIParserTests.swift */,
@@ -463,10 +483,20 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		98EA6306B55BD85CE676287E /* ChessCoachAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B30C36372C79B8BBEA5F617D /* AppViewModelTests.swift */,
+				1852D588A5BBD052473B79F6 /* Info.plist */,
+			);
+			path = ChessCoachAppTests;
+			sourceTree = "<group>";
+		};
 		9D7F7BE01247313712C10D50 /* ChessCoachSharedTests */ = {
 			isa = PBXGroup;
 			children = (
 				A25CA6AA872B33ADCAEE960F /* Info.plist */,
+				B8690C765E633CB2F81FFCBE /* InfrastructureTests.swift */,
 				3D2CE4FBB6A4E6E272074909 /* MoveTests.swift */,
 				C6DD7376A25B0F1A12A9B3AF /* PieceTests.swift */,
 				822F4F70AA0108FB9B2B1B5E /* PositionTests.swift */,
@@ -528,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				A9CE9C95248B42CFFC076E27 /* ChessCoachApp.app */,
+				77CA69F06CBEB0BCEE3AF487 /* ChessCoachAppTests.xctest */,
 				53B23FDEB110A87C0736FF9D /* ChessCoachCoach.framework */,
 				A982F60DEC3252181E9688BF /* ChessCoachCoachTests.xctest */,
 				A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */,
@@ -628,6 +659,24 @@
 			);
 			productName = ChessCoachSharedTests;
 			productReference = DA9557281EB680D0F0CC4D35 /* ChessCoachSharedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6EA6B028AC9103010B54C6BB /* ChessCoachAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 236DFA4B157D9F7C3E06BC2B /* Build configuration list for PBXNativeTarget "ChessCoachAppTests" */;
+			buildPhases = (
+				31F2292656FC381F065E182F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7098E26E72D28159D070929 /* PBXTargetDependency */,
+			);
+			name = ChessCoachAppTests;
+			packageProductDependencies = (
+			);
+			productName = ChessCoachAppTests;
+			productReference = 77CA69F06CBEB0BCEE3AF487 /* ChessCoachAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7C2C15DDF52CF086580BBC96 /* ChessCoachEngine */ = {
@@ -765,6 +814,7 @@
 			projectRoot = "";
 			targets = (
 				A7608D49E465315B0EF281A0 /* ChessCoachApp */,
+				6EA6B028AC9103010B54C6BB /* ChessCoachAppTests */,
 				F67D1867731DB46A55D59B89 /* ChessCoachCoach */,
 				978F0CBF059DCF13F5E18FC7 /* ChessCoachCoachTests */,
 				7C2C15DDF52CF086580BBC96 /* ChessCoachEngine */,
@@ -803,6 +853,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7524EF21F9B26EA830754A3 /* InfrastructureTests.swift in Sources */,
 				85A298B831CCAADF6B90675D /* MoveTests.swift in Sources */,
 				3DBFD7E82550BBFEC4DE2B2E /* PieceTests.swift in Sources */,
 				CBA60800BAEF59E5818709EC /* PositionTests.swift in Sources */,
@@ -814,8 +865,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFF1547FB9DF45CB24F5978 /* EngineInfrastructureTests.swift in Sources */,
 				D2DC1FF3F33DFE67798B9AD5 /* EngineLineTests.swift in Sources */,
 				EDF564824667C0396D749F8F /* UCIParserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31F2292656FC381F065E182F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D019F540504FBBABC4C2D6B /* AppViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +936,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92C2B91D06BFDAB549609A86 /* CoachEngineTests.swift in Sources */,
+				4E79CF75D06994EEDA9A0FA3 /* CoachInfrastructureTests.swift in Sources */,
 				7FFBB587194050AA9E753A95 /* ContentLoaderTests.swift in Sources */,
 				6C7B3A7BDC0979541A41C5C6 /* OpeningBookTests.swift in Sources */,
 				D9749DE504C074FC85C2DA1B /* PuzzleEngineTests.swift in Sources */,
@@ -939,6 +1000,11 @@
 			isa = PBXTargetDependency;
 			target = 3A33EDEB511ACCE289320512 /* ChessCoachShared */;
 			targetProxy = 70154CABA02E3368F4CD9F1A /* PBXContainerItemProxy */;
+		};
+		F7098E26E72D28159D070929 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7608D49E465315B0EF281A0 /* ChessCoachApp */;
+			targetProxy = 41F317D9806B3A5FF908EB10 /* PBXContainerItemProxy */;
 		};
 		FFBBCB5952320989CA17FBAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1220,6 +1286,25 @@
 			};
 			name = Release;
 		};
+		D7FA80D97D053C3B68F19546 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChessCoachAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TESTED_PRODUCT_NAME = ChessCoachApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChessCoachApp.app/ChessCoachApp";
+			};
+			name = Release;
+		};
 		DAFD689016C0AA425F87450D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1279,6 +1364,25 @@
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
+		};
+		E2022B7EAC2AD98949E92153 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChessCoachAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chesscoach.app.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TESTED_PRODUCT_NAME = ChessCoachApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChessCoachApp.app/ChessCoachApp";
+			};
+			name = Debug;
 		};
 		E8047DF9BE03418A36B9B421 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1365,6 +1469,15 @@
 			buildConfigurations = (
 				B3470925DFDBF61C1A82A147 /* Debug */,
 				F325F054354CC4C488157853 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		236DFA4B157D9F7C3E06BC2B /* Build configuration list for PBXNativeTarget "ChessCoachAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2022B7EAC2AD98949E92153 /* Debug */,
+				D7FA80D97D053C3B68F19546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

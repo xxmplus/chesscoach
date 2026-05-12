@@ -28,12 +28,21 @@ final class PuzzleViewModel: ObservableObject {
         loadNextPuzzle()
     }
 
+    init(puzzle: Puzzle) {
+        load(puzzle)
+    }
+
     func loadNextPuzzle() {
         let all = loader.loadPuzzles()
-        currentPuzzle = all.randomElement()
-        if let p = currentPuzzle {
-            position = Position(fen: p.fen)
+        if let puzzle = all.randomElement() {
+            load(puzzle)
         }
+    }
+
+    private func load(_ puzzle: Puzzle) {
+        currentPuzzle = puzzle
+        position = Position(fen: puzzle.fen)
+        engine.load(puzzle)
         feedbackMessage = nil
         feedbackType = nil
         hintsUsed = 0
@@ -48,12 +57,13 @@ final class PuzzleViewModel: ObservableObject {
         let result = engine.submitMove(uci)
         switch result {
         case .correct:
+            isSolved = engine.isSolved
             if isSolved {
                 feedbackMessage = "Puzzle complete!"
                 feedbackType = .correct
             } else {
-                // Need more moves
-                break
+                feedbackMessage = "Good move. Find the next move."
+                feedbackType = .correct
             }
         case .wrong(let move):
             feedbackMessage = "Not this move. Try again or use a hint."

@@ -51,11 +51,11 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
     }
 
     public func startAnalysis(fen: String, depth: Int?, timeout: TimeInterval?) -> AnyPublisher<EngineLine, Never> {
+        let subject = PassthroughSubject<EngineLine, Never>()
+        analysisSubject = subject
+
         engineQueue.async { [weak self] in
             guard let self = self else { return }
-            self.stopAnalysisInternal()
-
-            let subject = PassthroughSubject<EngineLine, Never>()
             self.analysisSubject = subject
             self.currentDepth = depth ?? 20
 
@@ -75,7 +75,7 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
             }
         }
 
-        return analysisSubject!
+        return subject
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
@@ -137,42 +137,53 @@ public final class StockfishAdapter: NSObject, ChessEngine, WKScriptMessageHandl
 
     private func handleEngineOutput(_ line: String) {
         engineQueue.async { [weak self] in
-            guard let self = self else { return }
+            self?.handleEngineOutputOnQueue(line)
+        }
+    }
 
-            // The HTML bridge signals engine readiness via this marker
-            if line == "stockfish:ready" {
-                self.engineReady = true
-                self.isAvailable = true
-                self.pendingContinuation?.resume()
-                self.pendingContinuation = nil
-                return
-            }
+#if DEBUG
+    func test_handleEngineOutput(_ line: String) {
+        handleEngineOutputOnQueue(line)
+    }
+#endif
 
-            // UCI responses
-            if line == "uciok" {
-                return
-            }
-            if line == "readyok" {
-                return
-            }
+    private func handleEngineOutputOnQueue(_ line: String) {
+        // The HTML bridge signals engine readiness via this marker
+        if line == "stockfish:ready" {
+            engineReady = true
+            isAvailable = true
+            pendingContinuation?.resume()
+            pendingContinuation = nil
+            let commands = pendingCommands
+            pendingCommands.removeAll()
+            commands.forEach(sendCommandNow)
+            return
+        }
 
-            if line.hasPrefix("bestmove") {
-                let tokens = line.split(separator: " ").map(String.init)
-                self.lastBestMove = tokens.count >= 2 ? tokens[1] : nil
-                return
-            }
+        // UCI responses
+        if line == "uciok" {
+            return
+        }
+        if line == "readyok" {
+            return
+        }
 
-            // Parse info lines: depth, score, pv
-            if let parsed = UCIParser.parseInfoLine(line) {
-                let engineLine = EngineLine(
-                    depth: parsed.depth,
-                    score: parsed.score,
-                    moves: parsed.moves,
-                    pv: parsed.pv
-                )
-                DispatchQueue.main.async {
-                    self.analysisSubject?.send(engineLine)
-                }
+        if line.hasPrefix("bestmove") {
+            let tokens = line.split(separator: " ").map(String.init)
+            lastBestMove = tokens.count >= 2 ? tokens[1] : nil
+            return
+        }
+
+        // Parse info lines: depth, score, pv
+        if let parsed = UCIParser.parseInfoLine(line) {
+            let engineLine = EngineLine(
+                depth: parsed.depth,
+                score: parsed.score,
+                moves: parsed.moves,
+                pv: parsed.pv
+            )
+            DispatchQueue.main.async {
+                self.analysisSubject?.send(engineLine)
             }
         }
     }

@@ -193,6 +193,26 @@ targets:
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
 
+  ChessCoachAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ChessCoachAppTests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.app.tests
+        TESTED_PRODUCT_NAME: ChessCoachApp
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: ChessCoachApp
+    info:
+      path: ChessCoachAppTests/Info.plist
+      properties:
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+
 schemes:
   ChessCoachApp:
     build:
@@ -204,6 +224,7 @@ schemes:
         - ChessCoachSharedTests
         - ChessCoachEngineTests
         - ChessCoachCoachTests
+        - ChessCoachAppTests
     run:
       config: Debug
     profile:
