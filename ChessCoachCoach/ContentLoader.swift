@@ -26,9 +26,9 @@ public final class ContentLoader {
         if let url = Bundle.main.url(forResource: "puzzles", withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let decoded = try? JSONDecoder().decode(PuzzlesPayload.self, from: data) {
-            return decoded.puzzles
+            return decoded.puzzles.filter { $0.fen.split(separator: " ")[1] == "w" }
         }
-        return Self.builtInPuzzles
+        return Self.builtInPuzzles.filter { $0.fen.split(separator: " ")[1] == "w" }
     }
 
     public func puzzles(for rating: Int, limit: Int = 10) -> [Puzzle] {
@@ -225,36 +225,42 @@ public final class ContentLoader {
 
     private static let builtInPuzzles: [Puzzle] = [
         // EASY (600-900)
-        Puzzle(id: "p-001", fen: "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
-               solution: ["h7h6"], themes: ["matingattack"], difficulty: 1, rating: 600,
-               hints: ["Black can deliver checkmate in one move", "The h7 pawn can advance to h6, delivering checkmate on the first rank"]),
-        Puzzle(id: "p-002", fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3",
+        // Scholar's Mate — White delivers checkmate in 4 moves
+        Puzzle(id: "p-001", fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 2",
+               solution: ["f3g5", "f8g7", "d1h5", "b8c6", "h5f7"],
+               themes: ["checkmate"], difficulty: 1, rating: 600,
+               hints: ["Move the knight from f3 to g5, attacking the black king", "When Black moves the bishop to g7, place your queen on h5", "Then move the queen from h5 to f7 — checkmate!"]),
+
+        Puzzle(id: "p-002", fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 2",
                solution: ["f3e5"], themes: ["fork"], difficulty: 2, rating: 750,
-               hints: ["A knight can attack two pieces at once", "The knight on f3 can jump to e5, forking the black king and queen"]),
+               hints: ["Move the knight from f3 to e5 — it attacks the black queen and the pawn on d7", "The knight jumps to e5, winning material"]),
+
         Puzzle(id: "p-003", fen: "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
                solution: ["c4f7"], themes: ["checkmate"], difficulty: 2, rating: 800,
-               hints: ["The bishop can deliver checkmate on f7", "Black's f7 pawn is defended only by the king"]),
+               hints: ["Move the bishop from c4 to f7 — it gives checkmate", "The black pawn on f7 is defended only by the king, so the bishop delivers checkmate"]),
 
         // MEDIUM (900-1200)
         Puzzle(id: "p-004", fen: "r2qkbnr/ppp2ppp/2np4/4p3/2B1P1b1/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 5",
                solution: ["f3e5"], themes: ["fork"], difficulty: 4, rating: 950,
-               hints: ["The knight can attack two black pieces", "Moving to e5 attacks both the pawn on d6 and the bishop on g4"]),
+               hints: ["Move the knight from f3 to e5 — it attacks the pawn on d6 and the bishop on g4 at the same time", "Taking on e5 wins a piece"]),
+
         Puzzle(id: "p-005", fen: "r1bqk2r/ppp2ppp/2np1n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 0 6",
                solution: ["c3d4"], themes: ["opening"], difficulty: 4, rating: 1000,
-               hints: ["Central control is key", "Advancing the d-pawn opens the diagonal for the queen"]),
+               hints: ["Move the pawn from c3 to d4, claiming the centre", "This opens the diagonal for your queen and connects your rooks"]),
 
         // HARD (1200-1600)
         Puzzle(id: "p-006", fen: "r1bqkb1r/pppp1ppp/2n5/4p3/2BnP3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4",
                solution: ["f3e5", "d6e5", "d1h5"], themes: ["tactics", "attack"], difficulty: 6, rating: 1300,
-               hints: ["Sacrifice the knight for a devastating attack", "After Nxe5 dxe5, Qh5+ forces checkmate"]),
+               hints: ["Move the knight from f3 to e5, sacrificing it", "After Black takes with d6xe5, move your queen from d1 to h5", "Qh5+ delivers checkmate"]),
+
         Puzzle(id: "p-007", fen: "r2qk2r/ppp2ppp/2n1bn2/3pp3/2B1P1b1/2NP1N2/PPP2PPP/R1BQK2R w KQkq - 0 7",
                solution: ["c4d5"], themes: ["opening", "centrecontrol"], difficulty: 6, rating: 1350,
-               hints: ["Strike at the centre", "The pawn fork wins a piece"]),
+               hints: ["Move the pawn from c4 to d5, attacking the pawn on e6", "This opens the c-file and puts Black's centre under pressure"]),
 
         // EXPERT (1600-1800)
         Puzzle(id: "p-008", fen: "r1bqr1k1/pp1nbppp/2p2n2/3pp3/2B1P1b1/2NP1N2/PPP1BPPP/R2QK2R w KQ - 0 9",
                solution: ["e4d5", "f6d5", "e1e8", "d8e8", "d3d4"], themes: ["tactics", "exchange"], difficulty: 8, rating: 1650,
-               hints: ["Win the exchange with a tactic", "A discovered attack wins the rook"])
+               hints: ["Move the pawn from e4 to d5, attacking the pawn on f6", "When Black takes back with f6xd5, move your rook to e8", "Then move your knight from d3 to d4, winning the rook on a8"])
     ]
 }
 

@@ -44,28 +44,47 @@ public struct ChessBoardView: View {
     @ViewBuilder
     private func boardBody(geometry: GeometryProxy) -> some View {
         let size = min(geometry.size.width, geometry.size.height)
-        let squareSize = size / 8
+        let labelSize: CGFloat = 16
+        let boardSize = size - labelSize
+        let squareSize = boardSize / 8
 
-        ZStack {
-            squaresLayer(size: size, squareSize: squareSize)
-            arrowsOverlay(squareSize: squareSize)
-            draggedPieceOverlay(squareSize: squareSize, boardSize: size)
-        }
-        .frame(width: size, height: size, alignment: .center)
-        .gesture(interactive ? makeDragGesture(squareSize: squareSize) : nil)
-    }
-
-    @ViewBuilder
-    private func squaresLayer(size: CGFloat, squareSize: CGFloat) -> some View {
         VStack(spacing: 0) {
-            ForEach((0..<8).reversed(), id: \.self) { rank in
-                HStack(spacing: 0) {
-                    ForEach(0..<8, id: \.self) { file in
-                        squareCell(file: file, rank: rank, squareSize: squareSize)
-                    }
+            // Top: file labels a..h
+            HStack(spacing: 0) {
+                Text("")
+                    .frame(width: labelSize, height: labelSize)
+                ForEach(1...8, id: \.self) { file in
+                    Text(String(Character(UnicodeScalar(96 + file)!)))
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(theme.textMuted)
+                        .frame(width: squareSize, height: labelSize)
                 }
             }
+            // Board rows
+            ZStack(alignment: .topLeading) {
+                VStack(spacing: 0) {
+                    ForEach((0..<8).reversed(), id: \.self) { rank in
+                        HStack(spacing: 0) {
+                            ForEach(0..<8, id: \.self) { file in
+                                squareCell(file: file, rank: rank, squareSize: squareSize)
+                            }
+                        }
+                    }
+                }
+                ForEach((0..<8).reversed(), id: \.self) { rank in
+                    Text("\(rank + 1)")
+                        .font(.system(size: 10, weight: .medium))
+                        .foregroundColor(theme.textMuted)
+                        .frame(width: labelSize, height: squareSize)
+                        .offset(y: CGFloat(7 - rank) * squareSize)
+                }
+                arrowsOverlay(squareSize: squareSize, boardOffset: labelSize)
+                draggedPieceOverlay(squareSize: squareSize, boardSize: boardSize, boardOffset: labelSize)
+            }
+            .frame(width: boardSize, height: boardSize)
+            .offset(x: labelSize)
         }
+        .gesture(interactive ? makeDragGesture(squareSize: squareSize, boardOffset: labelSize) : nil)
     }
 
     @ViewBuilder
@@ -95,18 +114,18 @@ public struct ChessBoardView: View {
     }
 
     @ViewBuilder
-    private func arrowsOverlay(squareSize: CGFloat) -> some View {
+    private func arrowsOverlay(squareSize: CGFloat, boardOffset: CGFloat) -> some View {
         if !engineLines.isEmpty {
-            EngineArrowsOverlay(lines: engineLines, squareSize: squareSize)
+            EngineArrowsOverlay(lines: engineLines, squareSize: squareSize, boardOffset: boardOffset)
         }
     }
 
     @ViewBuilder
-    private func draggedPieceOverlay(squareSize: CGFloat, boardSize: CGFloat) -> some View {
+    private func draggedPieceOverlay(squareSize: CGFloat, boardSize: CGFloat, boardOffset: CGFloat) -> some View {
         if let dragged = draggedPiece {
             PieceView(piece: dragged.piece, size: squareSize)
                 .offset(dragOffset)
-                .position(x: boardSize / 2, y: boardSize / 2)
+                .position(x: boardSize / 2 + boardOffset, y: boardSize / 2)
                 .allowsHitTesting(false)
         }
     }
@@ -151,11 +170,11 @@ public struct ChessBoardView: View {
         }
     }
 
-    private func makeDragGesture(squareSize: CGFloat) -> some Gesture {
+    private func makeDragGesture(squareSize: CGFloat, boardOffset: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
                 if draggedPiece == nil {
-                    let file = Int(value.location.x / squareSize)
+                    let file = Int((value.location.x - boardOffset) / squareSize)
                     let rank = 7 - Int(value.location.y / squareSize)
                     let clampedFile = max(0, min(7, file))
                     let clampedRank = max(0, min(7, rank))
@@ -172,7 +191,7 @@ public struct ChessBoardView: View {
             }
             .onEnded { value in
                 guard let dragged = draggedPiece else { return }
-                let file = Int(value.location.x / squareSize)
+                let file = Int((value.location.x - boardOffset) / squareSize)
                 let rank = 7 - Int(value.location.y / squareSize)
                 let target = Square(file: max(0, min(7, file)), rank: max(0, min(7, rank)))
 
@@ -260,16 +279,27 @@ struct PieceView: View {
 struct EngineArrowsOverlay: View {
     let lines: [EngineLine]
     let squareSize: CGFloat
+    let boardOffset: CGFloat
 
     var body: some View {
         Canvas { context, _ in
             for (index, line) in lines.prefix(3).enumerated() {
                 guard line.moves.count >= 2 else { continue }
-                let fromCG = squareCG(fromUCi: line.moves[0])
-                let toCG = squareCG(fromUCi: line.moves[1])
+                let fromCG = squareCG(fromUci: line.moves[0])
+                let toCG = squareCG(fromUci: line.moves[1])
                 drawArrow(context: context, from: fromCG, to: toCG, color: arrowColor(index: index))
             }
         }
+    }
+
+    private func squareCG(fromUci uci: String) -> CGPoint {
+        guard uci.count >= 4,
+              let sq = Square(description: String(uci.prefix(2))) else {
+            return .zero
+        }
+        let x = boardOffset + CGFloat(7 - sq.file) * squareSize + squareSize / 2
+        let y = CGFloat(sq.rank) * squareSize + squareSize / 2
+        return CGPoint(x: x, y: y)
     }
 
     private func drawArrow(context: GraphicsContext, from: CGPoint, to: CGPoint, color: Color) {
@@ -297,16 +327,6 @@ struct EngineArrowsOverlay: View {
         path.addLine(to: CGPoint(x: rightX, y: rightY))
 
         context.stroke(path, with: .color(color), lineWidth: 3)
-    }
-
-    private func squareCG(fromUCi uci: String) -> CGPoint {
-        guard uci.count >= 4,
-              let sq = Square(description: String(uci.prefix(2))) else {
-            return .zero
-        }
-        let x = CGFloat(7 - sq.file) * squareSize + squareSize / 2
-        let y = CGFloat(sq.rank) * squareSize + squareSize / 2
-        return CGPoint(x: x, y: y)
     }
 
     private func arrowColor(index: Int) -> Color {
