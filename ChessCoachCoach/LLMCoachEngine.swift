@@ -1,5 +1,5 @@
 import Foundation
-import ChessCoachShared
+@preconcurrency import ChessCoachShared
 import ChessCoachEngine
 
 // MARK: - LLMCoachEngine

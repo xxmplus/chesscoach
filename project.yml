@@ -179,6 +179,7 @@ targets:
           # Run './scripts/bootstrap.sh --fetch' to download them.
           "${PROJECT_DIR}/scripts/bootstrap.sh" --check
         basedOnDependencyAnalysis: false
+        sandbox: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.friday.chesscoach

@@ -1,6 +1,5 @@
 import Foundation
-import ChessCoachShared
-import ChessCoachEngine
+@preconcurrency import ChessCoachShared
 
 // MARK: - LLMService
 

@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "AppIcon.png",
       "idiom" : "universal",
+      "filename" : "AppIcon.png",
       "scale" : "1x",
       "size" : "1024x1024"
     }

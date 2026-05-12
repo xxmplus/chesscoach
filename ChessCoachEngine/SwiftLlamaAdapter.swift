@@ -5,7 +5,7 @@ import SwiftLlama
 
 /// Adapter bridging LLMService to pgorzelany/swift-llama-cpp.
 /// Uses LlamaService.actor with Metal-accelerated GGUF inference.
-public final class SwiftLlamaAdapter: LLMService {
+public final class SwiftLlamaAdapter: LLMService, @unchecked Sendable {
 
     private var llamaService: LlamaService?
     private let modelPath: URL

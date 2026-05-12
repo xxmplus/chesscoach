@@ -1,7 +1,6 @@
 import Foundation
 import ChessCoachShared
 import ChessCoachEngine
-import ChessCoachCoach
 
 // MARK: - CoachManager
 

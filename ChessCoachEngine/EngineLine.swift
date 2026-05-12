@@ -26,7 +26,7 @@ public struct EngineLine: Identifiable, Equatable {
 
 // MARK: - EngineScore
 
-public enum EngineScore: Equatable {
+public enum EngineScore: Equatable, Sendable {
     case cp(Int)       // centipawns
     case mate(Int)     // moves to mate (positive = white winning)
     case upperBound(Int)
