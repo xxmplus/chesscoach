@@ -15,6 +15,13 @@ public struct EngineLine: Identifiable, Equatable {
         self.moves = moves
         self.pv = pv
     }
+
+    public static func == (lhs: EngineLine, rhs: EngineLine) -> Bool {
+        lhs.depth == rhs.depth &&
+        lhs.score == rhs.score &&
+        lhs.moves == rhs.moves &&
+        lhs.pv == rhs.pv
+    }
 }
 
 // MARK: - EngineScore

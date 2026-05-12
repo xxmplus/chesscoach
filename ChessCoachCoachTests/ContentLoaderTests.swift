@@ -1,5 +1,6 @@
 import XCTest
 @testable import ChessCoachCoach
+@testable import ChessCoachShared
 
 final class ContentLoaderTests: XCTestCase {
 

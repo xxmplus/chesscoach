@@ -16,7 +16,7 @@ public struct Puzzle: Identifiable, Codable {
     public var moveCount: Int { solution.count }
 }
 
-public enum PuzzleResult {
+public enum PuzzleResult: Equatable {
     case correct
     case wrong(move: String)
     case hintRequested

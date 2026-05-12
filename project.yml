@@ -192,3 +192,56 @@ targets:
         UILaunchScreen: {}
         NSAppTransportSecurity:
           NSAllowsArbitraryLoads: true
+
+schemes:
+  ChessCoachApp:
+    build:
+      targets:
+        ChessCoachApp: all
+    test:
+      config: Debug
+      targets:
+        - ChessCoachSharedTests
+        - ChessCoachEngineTests
+        - ChessCoachCoachTests
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  ChessCoachShared:
+    build:
+      targets:
+        ChessCoachShared: all
+    test:
+      config: Debug
+      targets:
+        - ChessCoachSharedTests
+    run:
+      config: Debug
+
+  ChessCoachEngine:
+    build:
+      targets:
+        ChessCoachEngine: all
+    test:
+      config: Debug
+      targets:
+        - ChessCoachEngineTests
+    run:
+      config: Debug
+
+  ChessCoachCoach:
+    build:
+      targets:
+        ChessCoachCoach: all
+    test:
+      config: Debug
+      targets:
+        - ChessCoachCoachTests
+    run:
+      config: Debug

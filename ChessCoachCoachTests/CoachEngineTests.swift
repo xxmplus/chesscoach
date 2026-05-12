@@ -1,5 +1,7 @@
 import XCTest
 @testable import ChessCoachCoach
+@testable import ChessCoachEngine
+@testable import ChessCoachShared
 
 final class CoachEngineTests: XCTestCase {
 

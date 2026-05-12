@@ -244,7 +244,7 @@ public final class CoachEngine {
         if cp >= 30  { return .good }
         if cp >= -30 { return .best }
         if cp < -80  { return .blunder }
-        if cp < -30  { return .mistake }
+        if cp <= -60 { return .mistake }
         return .inaccuracy
     }
 

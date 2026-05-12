@@ -10,6 +10,9 @@ public struct Position {
     // MARK: - Board Representation
 
     /// 8×8 board. Index `[rank][file]` where rank 0 = rank 1 (white's back rank), file 0 = file a.
+    /// board[0] = rank 1 (white's back rank, where white pieces start).
+    /// board[7] = rank 8 (black's back rank, where black pieces start).
+    /// White pawns at board[1] advance toward board[7] (promotion at board[7]).
     /// `nil` = empty square.
     private var board: [[Piece?]]
 
@@ -39,8 +42,7 @@ public struct Position {
 
     public var fen: String {
         var rows: [String] = []
-        // board[0] = rank 1 (white's back rank); board[7] = rank 8 (black's back rank)
-        // FEN requires rank 8 first → iterate board[7] down to board[0]
+        // board[0] = rank 1, board[7] = rank 8; FEN requires rank 8 first → iterate reversed
         for rank in (0..<8).reversed() {
             var row = ""
             var empty = 0
@@ -139,7 +141,7 @@ public struct Position {
         let r = sq.rank, f = sq.file
 
         // Pawn attacks
-        let pawnDir = color == .white ? 1 : -1
+        let pawnDir = color == .white ? -1 : 1
         for df in [-1, 1] {
             let nr = r + pawnDir, nf = f + df
             if nr >= 0 && nr < 8 && nf >= 0 && nf < 8,
@@ -247,10 +249,9 @@ public struct Position {
         return pseudo.filter { move in
             var copy = self
             copy.applyMove(move)
-            let opponentColor: PieceColor = turn == .white ? .black : .white
-            guard let oppKing = copy.kingSquare(for: opponentColor) else { return false }
-            let attackerColor: PieceColor = turn == .white ? .white : .black
-            return !copy.isSquareAttacked(oppKing, by: attackerColor)
+            guard let ownKing = copy.kingSquare(for: piece.color) else { return true }
+            let opponentColor: PieceColor = piece.color == .white ? .black : .white
+            return !copy.isSquareAttacked(ownKing, by: opponentColor)
         }
     }
 
@@ -331,11 +332,59 @@ public struct Position {
 
     private func kingMoves(rank: Int, file: Int, color: PieceColor) -> [Move] {
         let offsets = [(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
-        return slidingPieceMoves(rank: rank, file: file, offsets: offsets, color: color)
+        var moves = slidingPieceMoves(rank: rank, file: file, offsets: offsets, color: color)
+
+        let opponent: PieceColor = color == .white ? .black : .white
+        let homeRank = color == .white ? 0 : 7
+        guard rank == homeRank, file == 4, !isSquareAttacked(Square(file: 4, rank: homeRank), by: opponent) else {
+            return moves
+        }
+
+        let kingsideRight = color == .white ? "K" : "k"
+        if castling.contains(kingsideRight),
+           board[homeRank][5] == nil,
+           board[homeRank][6] == nil,
+           board[homeRank][7]?.kind == .rook,
+           board[homeRank][7]?.color == color,
+           !isSquareAttacked(Square(file: 5, rank: homeRank), by: opponent),
+           !isSquareAttacked(Square(file: 6, rank: homeRank), by: opponent) {
+            moves.append(Move(from: Square(file: file, rank: rank), to: Square(file: 6, rank: homeRank)))
+        }
+
+        let queensideRight = color == .white ? "Q" : "q"
+        if castling.contains(queensideRight),
+           board[homeRank][1] == nil,
+           board[homeRank][2] == nil,
+           board[homeRank][3] == nil,
+           board[homeRank][0]?.kind == .rook,
+           board[homeRank][0]?.color == color,
+           !isSquareAttacked(Square(file: 3, rank: homeRank), by: opponent),
+           !isSquareAttacked(Square(file: 2, rank: homeRank), by: opponent) {
+            moves.append(Move(from: Square(file: file, rank: rank), to: Square(file: 2, rank: homeRank)))
+        }
+
+        return moves
     }
 
     private func slidingMoves(rank: Int, file: Int, dirs: [(Int, Int)], color: PieceColor) -> [Move] {
-        return slidingPieceMoves(rank: rank, file: file, offsets: dirs, color: color)
+        var moves: [Move] = []
+        let from = Square(file: file, rank: rank)
+        for (dr, df) in dirs {
+            var nr = rank + dr
+            var nf = file + df
+            while nr >= 0 && nr < 8 && nf >= 0 && nf < 8 {
+                let to = Square(file: nf, rank: nr)
+                if let p = board[nr][nf] {
+                    if p.color != color { moves.append(Move(from: from, to: to)) }
+                    break
+                } else {
+                    moves.append(Move(from: from, to: to))
+                }
+                nr += dr
+                nf += df
+            }
+        }
+        return moves
     }
 
     private func slidingPieceMoves(rank: Int, file: Int, offsets: [(Int, Int)], color: PieceColor) -> [Move] {

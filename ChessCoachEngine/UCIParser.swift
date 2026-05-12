@@ -25,14 +25,25 @@ public enum UCIParser {
             case "score":
                 i += 1
                 if i < tokens.count {
+                    var bound: String?
+                    if tokens[i] == "upperbound" || tokens[i] == "lowerbound" {
+                        bound = tokens[i]
+                        i += 1
+                    }
+
                     let type = tokens[i]
                     i += 1
                     if i < tokens.count, let value = Int(tokens[i]) {
+                        if i + 1 < tokens.count, tokens[i + 1] == "upperbound" || tokens[i + 1] == "lowerbound" {
+                            bound = tokens[i + 1]
+                        }
+
                         switch type {
-                        case "cp":   score = .cp(value)
+                        case "cp":
+                            if bound == "upperbound" { score = .upperBound(value) }
+                            else if bound == "lowerbound" { score = .lowerBound(value) }
+                            else { score = .cp(value) }
                         case "mate": score = .mate(value)
-                        case "upperbound": score = .upperBound(value)
-                        case "lowerbound": score = .lowerBound(value)
                         default: break
                         }
                     }

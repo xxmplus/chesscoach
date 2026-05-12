@@ -23,14 +23,14 @@ final class UCIParserTests: XCTestCase {
     }
 
     func testParseInfoLine_upperBound() {
-        let line = "info depth 10 score upperbound cp 25"
+        let line = "info depth 10 score upperbound cp 25 pv e2e4"
         let result = UCIParser.parseInfoLine(line)
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.score, .upperBound(25))
     }
 
     func testParseInfoLine_lowerBound() {
-        let line = "info depth 10 score lowerbound cp -10"
+        let line = "info depth 10 score lowerbound cp -10 pv e2e4"
         let result = UCIParser.parseInfoLine(line)
         XCTAssertNotNil(result)
         XCTAssertEqual(result?.score, .lowerBound(-10))
@@ -76,8 +76,10 @@ final class UCIParserTests: XCTestCase {
     }
 
     func testParseBestMove_invalid_returnsEmpty() {
-        XCTAssertEqual(UCIParser.parseBestMove(""), ("", nil))
-        XCTAssertEqual(UCIParser.parseBestMove("move e2e4"), ("", nil))
-        XCTAssertEqual(UCIParser.parseBestMove("info depth 10"), ("", nil))
+        for line in ["", "move e2e4", "info depth 10"] {
+            let (best, ponder) = UCIParser.parseBestMove(line)
+            XCTAssertEqual(best, "")
+            XCTAssertNil(ponder)
+        }
     }
 }

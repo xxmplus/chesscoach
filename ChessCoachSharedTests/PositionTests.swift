@@ -122,8 +122,8 @@ final class PositionTests: XCTestCase {
     }
 
     func testLegalMoves_castlingRights() {
-        // Mid-game: white king e1, rooks a1+h1 unmoved, most other pieces developed away
-        // Rank-1-first FEN (rank 1 at start, rank 8 at end): ranks[7]="R3K2R", ranks[0]="r1bqk2r"
+        // Mid-game: white king e1, rooks a1+h1 unmoved, castling rights KQkq
+        // Standard FEN is rank-8-first; parseFen maps rank 1 to board[0].
         let fen = "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/5N2/PPPP1PPP/R3K2R w KQkq - 6 4"
         let pos = Position(fen: fen)
         let e1 = Square(file: 4, rank: 0)
@@ -141,6 +141,10 @@ final class PositionTests: XCTestCase {
         _ = pos.makeMove(uci: "b8c6")
         _ = pos.makeMove(uci: "f1c4")
         _ = pos.makeMove(uci: "g8f6")
+        _ = pos.makeMove(uci: "e1e2")
+        _ = pos.makeMove(uci: "f8c5")
+        _ = pos.makeMove(uci: "e2e1")
+        _ = pos.makeMove(uci: "d7d6")
         let e1 = Square(file: 4, rank: 0)
         let moves = pos.legalMoves(from: e1)
         let uci = moves.map { squareToUCI($0.from) + squareToUCI($0.to) }
@@ -163,23 +167,17 @@ final class PositionTests: XCTestCase {
     }
 
     func testIsCheckmate_scholarsMate() {
-        // Queen on h5 delivers checkmate to black king on e8.
-        // King e8 is trapped — all adjacent squares are covered by queen on h5.
-        // White king elsewhere (a1). Black pieces irrelevant.
-        // Rank-1-first FEN with parseFen board[7-rankIdx]:
-        // ranks[4]="7Q" → board[3] (rank 4): h4=queen ✓
-        // ranks[0]="rnbqkbnr" → board[7] (rank 8): e8=black king ✓
-        let fen = "rnbqkbnr/ppppp1ppp/8/8/7Q/8/PPPPPPPP/K7 w - - 0 1"
+        // Scholar's mate after 1.e4 e5 2.Bc4 Nc6 3.Qh5 Nf6 4.Qxf7#.
+        // Black to move: black king on e8 is in check from the white queen on f7.
+        let fen = "r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4"
         let pos = Position(fen: fen)
         XCTAssertTrue(pos.isCheckmate, "Queen on h5 checking e8 with trapped king should be checkmate")
     }
 
     func testIsStalemate() {
-        // White queen on h6 traps black king on h8. King has no legal moves and is not in check.
-        // Queen on h6 attacks: g7, h7 (occupied by own pawn), g8, h8(king), g6, h5...
-        // King h8 can only move to g8 (attacked by queen), f8 (off-board diagonals blocked by own bishop/king), g7 (pawn).
-        // White king on e1: not relevant, doesn't attack any of black king's escape squares.
-        let fen = "8/8/8/8/8/7Q/8/4K2k w - - 0 1"
+        // Black king a8 trapped by white queen b6: a7 and b8 are attacked, but a8 is not.
+        // Black to move has no legal moves and is not in check.
+        let fen = "k7/8/1Q6/8/8/8/8/4K3 b - - 0 1"
         let pos = Position(fen: fen)
         XCTAssertTrue(pos.isStalemate, "Trapped black king not in check should be stalemate")
     }
@@ -209,9 +207,9 @@ final class PositionTests: XCTestCase {
     }
 
     func testMakeMove_promotion() {
-        // White pawn on e7 (rank 7 for white) can advance to e8 and promote to queen
-        // Standard FEN format (rank 8 first): "8"=rank8 empty, ..., rank7="4P3"=pawn at e7
-        let fen = "8/8/8/8/8/8/4P3/4K2R w - - 0 1"
+        // White pawn on e7 (rank 7 in chess) can advance to e8 and promote to queen
+        // Standard FEN rank 7 row is the second row.
+        let fen = "8/4P3/8/8/8/8/8/4K2R w - - 0 1"
         var pos = Position(fen: fen)
         let result = pos.makeMove(uci: "e7e8q")
         XCTAssertTrue(result, "Promotion move e7e8q should succeed")
