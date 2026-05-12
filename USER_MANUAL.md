@@ -11,7 +11,7 @@ This manual explains what the app currently supports, how to use each screen, an
 ### iPhone
 
 - iOS 17.0 or newer
-- Enough free storage for the app and bundled model assets
+- Enough free storage for optional downloaded/local model assets
 - Recommended: iPhone 13 or newer
 
 ### Mac for installation
@@ -134,12 +134,15 @@ The engine provides:
 
 The local coach uses the engine result as truth and turns it into beginner-friendly explanation text.
 
-Active bundled model:
+Default model metadata:
 
-- `DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf`
+- File name: `DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf`
+- Hugging Face repo: `unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF`
 - Display name: DeepSeek-R1 Distill (1.5B)
 - Approximate size: 1.0 GB
 - Intended role: explain engine output in clear language, not replace the chess engine
+
+The GGUF binary is intentionally not committed to the repository. The app can download the configured model at runtime, or developers can place a local `.gguf` file under `ChessCoachShared/Models/` for their own private build. See `ChessCoachShared/Models/README.md` for exact instructions.
 
 Important behavior:
 
@@ -329,7 +332,7 @@ Stored locally:
 - Puzzle/session activity
 - Rating history
 - Streak metadata
-- Downloaded/bundled model lookup state
+- Downloaded/local model lookup state
 
 No account login is currently required by the app. Engine analysis and LLM coaching are intended to run locally.
 

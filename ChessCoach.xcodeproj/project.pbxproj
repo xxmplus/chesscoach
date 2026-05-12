@@ -39,6 +39,7 @@
 		570CDA6F2A735B12EBC663FE /* stockfish.wasm in Resources */ = {isa = PBXBuildFile; fileRef = D31AEB5C48B7E7F2A09EACDD /* stockfish.wasm */; };
 		5DA8F014D33867979D5F9CB8 /* ChessCoachEngine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		60C53C0A0BB8A250F11785B2 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413E1E29EE92BABCFA6744AF /* PlayViewModel.swift */; };
+		61E1E2ABC0D6960B0722A0EA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 308241292395944337F3975A /* README.md */; };
 		63426CB53ABB740E7F62386A /* ChessCoachEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87A8391C732B7A492A6E8FF /* ChessCoachEngine.framework */; };
 		6713F531F894DB3E9D5F7DBD /* ChessCoachShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D726CC8D2430AA02152AD62 /* ChessCoachShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		677558C703CE07196CEB2F0E /* StockfishLoader.html in Resources */ = {isa = PBXBuildFile; fileRef = E5B7392DACDB7E74A52D4829 /* StockfishLoader.html */; };
@@ -219,6 +220,7 @@
 		24A5FCBC63676A52DA38338C /* SquareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareTests.swift; sourceTree = "<group>"; };
 		29FCECDBA57F2C89C1EE6A98 /* ContentLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
 		2AA4B3D6CDC5E79B2DB23F99 /* LearnViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnViewModel.swift; sourceTree = "<group>"; };
+		308241292395944337F3975A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		37891DB26DFBF4F34BD25F98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C3035E561DC9984E037751C /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		3C8EC63D6A1B6DA6BD98185E /* LessonLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLibrary.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				BDF798A042DC104101468FDB /* Move.swift */,
 				D1038220AFC4BEDAC6DE0180 /* Piece.swift */,
 				BF1A3D753A5E71CAA4F56A0F /* Position.swift */,
+				308241292395944337F3975A /* README.md */,
 				7EE497B52C584992BA8FA4D3 /* Square.swift */,
 				108C2B882209B81670076696 /* Theme.swift */,
 			);
@@ -843,6 +846,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB39ACAC6AF8102D4F708B35 /* Models in Resources */,
+				61E1E2ABC0D6960B0722A0EA /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

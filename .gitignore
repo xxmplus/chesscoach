@@ -65,8 +65,9 @@ tmp/
 *.swp
 *.swo
 
-# Large local model experiments
-# Keep the active bundled model tracked under ChessCoachShared/Models/.
+# Local model binaries
+# Model metadata is tracked in Swift; GGUF blobs stay local or are downloaded at runtime.
+*.gguf
 *.gguf.tmp
 *.gguf.download
 Models-archive/

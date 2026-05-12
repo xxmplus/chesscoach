@@ -11,7 +11,7 @@ The app uses a dark “Midnight Study” design language and is built as a Swift
 - **Play & Analyze** — interactive board, FEN loading, legal move validation, move history, analysis depth controls, best-move display, and evaluation bar.
 - **AI Coach** — local coach pipeline that explains Stockfish analysis in beginner-friendly language.
 - **Progress** — estimated Elo, puzzle/lesson counts, streaks, rating history, and weakness tracking.
-- **On-device model support** — bundled GGUF model lookup/download infrastructure using DeepSeek-R1 Distill Qwen 1.5B as the active model.
+- **On-device model support** — model metadata plus runtime/local GGUF download support; large model blobs are intentionally not stored in Git.
 
 See [`USER_MANUAL.md`](USER_MANUAL.md) for end-user usage and iPhone installation instructions.
 
@@ -101,11 +101,18 @@ More detailed steps are in [`USER_MANUAL.md`](USER_MANUAL.md).
 
 - Stockfish is the default analysis engine path.
 - `Lc0Adapter` is present as an alternate/future adapter hook.
-- The active local LLM model is:
+- GGUF model binaries are **not** committed to this repository.
+- Model metadata lives in `ChessCoachShared/LocalInferenceConfig.swift`.
+- Placeholder and manual download instructions live in `ChessCoachShared/Models/README.md`.
 
-```text
-ChessCoachShared/Models/DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf
-```
+Current default model metadata:
+
+| Field | Value |
+|---|---|
+| Display name | DeepSeek-R1 Distill (1.5B) |
+| Hugging Face repo | `unsloth/DeepSeek-R1-Distill-Qwen-1.5B-GGUF` |
+| File name | `DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf` |
+| Size | ~1065 MB |
 
 The chess engine evaluates positions. The LLM coach explains engine output; it is not the source of chess evaluation truth.
 
