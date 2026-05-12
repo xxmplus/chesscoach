@@ -172,6 +172,13 @@ targets:
       - path: ChessCoachApp
         excludes:
           - "**/.DS_Store"
+    preBuildScripts:
+      - name: Bootstrap dependencies
+        script: |
+          # Fail fast if build-time assets are missing.
+          # Run './scripts/bootstrap.sh --fetch' to download them.
+          "${PROJECT_DIR}/scripts/bootstrap.sh" --check
+        basedOnDependencyAnalysis: false
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chesscoach.app

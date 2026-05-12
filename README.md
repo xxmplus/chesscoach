@@ -86,24 +86,43 @@ xcodebuild \
   test
 ```
 
+## Build from Source
+
+```bash
+# 1. Fetch build dependencies (Stockfish WASM + LLM model, ~1 GB total)
+./scripts/bootstrap.sh
+
+# 2. Generate the Xcode project
+xcodegen generate
+
+# 3. Build
+xcodebuild -project ChessCoach.xcodeproj \
+  -scheme ChessCoachApp \
+  -configuration Debug \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  build
+```
+
+**CI / automated builds:** use `./scripts/bootstrap.sh --fetch` to download all assets without prompts.
+
 ## Install on iPhone
 
-1. Run `xcodegen generate`.
-2. Open `ChessCoach.xcodeproj`.
-3. Select the `ChessCoachApp` scheme.
-4. Select your connected iPhone as the destination.
-5. Configure signing under **Signing & Capabilities**.
-6. Press `Cmd+R`.
+1. Run `./scripts/bootstrap.sh` to download build dependencies.
+2. Run `xcodegen generate`.
+3. Open `ChessCoach.xcodeproj`.
+4. Select the `ChessCoachApp` scheme.
+5. Select your connected iPhone as the destination.
+6. Configure signing under **Signing & Capabilities**.
+7. Press `Cmd+R`.
 
 More detailed steps are in [`USER_MANUAL.md`](USER_MANUAL.md).
 
 ## Local Engine and Model Notes
 
-- Stockfish is the default analysis engine path.
+- Stockfish is the default analysis engine. The WASM build is downloaded automatically by `scripts/bootstrap.sh`.
 - `Lc0Adapter` is present as an alternate/future adapter hook.
-- GGUF model binaries are **not** committed to this repository.
+- GGUF model binaries are **not** committed — `scripts/bootstrap.sh` downloads them before the build.
 - Model metadata lives in `ChessCoachShared/LocalInferenceConfig.swift`.
-- Placeholder and manual download instructions live in `ChessCoachShared/Models/README.md`.
 
 Current default model metadata:
 

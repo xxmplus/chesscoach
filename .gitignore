@@ -71,3 +71,6 @@ tmp/
 *.gguf.tmp
 *.gguf.download
 Models-archive/
+
+# Generated asset shims (bootstrap creates these on demand)
+ChessCoachApp/Assets/stockfish/stockfish.wasm.js
