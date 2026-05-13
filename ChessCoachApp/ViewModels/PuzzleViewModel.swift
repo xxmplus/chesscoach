@@ -51,7 +51,7 @@ final class PuzzleViewModel: ObservableObject {
     private func load(_ puzzle: Puzzle) {
         currentPuzzle = puzzle
         position = Position(fen: puzzle.fen)
-        userColor = position.turn  // Remember which color the human plays
+        userColor = position.turn
         engine.load(puzzle)
         feedbackMessage = nil
         feedbackType = nil
@@ -72,7 +72,8 @@ final class PuzzleViewModel: ObservableObject {
                 feedbackMessage = "Puzzle complete!"
                 feedbackType = .correct
             } else {
-                // Apply the opponent's response (the move at the current attemptIndex)
+                // engine.attemptIndex is now 1 past the move just confirmed.
+                // The opponent's move is at solution[engine.attemptIndex].
                 if engine.attemptIndex < currentPuzzle?.solution.count ?? 0,
                    let opponentMove = currentPuzzle?.solution[engine.attemptIndex] {
                     applyOpponentMove(opponentMove)
@@ -84,9 +85,7 @@ final class PuzzleViewModel: ObservableObject {
             feedbackMessage = "Not this move. Try again or use a hint."
             feedbackType = .wrong
             attemptCount += 1
-            // Revert the invalid move — reset to the state before the user's move
             revertLastMove()
-            // Show engine-preferred line
             showEngineLine(for: move)
         case .hintRequested:
             break
@@ -105,12 +104,9 @@ final class PuzzleViewModel: ObservableObject {
         loadNextPuzzle()
     }
 
-    /// Reverts to the start of the current move sequence, discarding any partial
-    /// user move that was just applied to the board.
     func revertLastMove() {
         guard let puzzle = currentPuzzle else { return }
         position = Position(fen: puzzle.fen)
-        // Rebuild engine state to match
         engine.reset()
     }
 

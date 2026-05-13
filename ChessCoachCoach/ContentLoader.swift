@@ -225,11 +225,11 @@ public final class ContentLoader {
 
     private static let builtInPuzzles: [Puzzle] = [
         // EASY (600-900)
-        // Scholar's Mate — White delivers checkmate in 4 moves
-        Puzzle(id: "p-001", fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 2",
-               solution: ["f3g5", "f8g7", "d1h5", "b8c6", "h5f7"],
+        // Back-rank mate: Black's king is trapped on the back rank with no legal escapes
+        Puzzle(id: "p-001", fen: "6k1/5ppp/8/8/8/8/8/R3K3 w Q - 0 1",
+               solution: ["e1e8"],
                themes: ["checkmate"], difficulty: 1, rating: 600,
-               hints: ["Move the knight from f3 to g5, attacking the black king", "When Black moves the bishop to g7, place your queen on h5", "Then move the queen from h5 to f7 — checkmate!"]),
+               hints: ["Move the rook from a1 to a8 — delivering checkmate", "Black's king is trapped on the back rank with no safe squares to escape"]),
 
         Puzzle(id: "p-002", fen: "r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 2",
                solution: ["f3e5"], themes: ["fork"], difficulty: 2, rating: 750,
